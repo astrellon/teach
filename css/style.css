@@ -1,0 +1,17 @@
+.value-box {
+      background: #f9f2f4;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      padding: 1em;
+      color: #c7254e;
+      margin: 0.75em;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+pre {
+    margin: 1em;
+}
+
+.mono {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
