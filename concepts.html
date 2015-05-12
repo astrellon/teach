@@ -1,16 +1,15 @@
 <html>
   <head>
     <title>Concepts</title>
-    <!-- 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
--->
-    <link rel="stylesheet" href="highlight/styles/monokai.css">
+    <link rel="stylesheet" href="highlight/styles/default.css">
     
     <link rel="stylesheet" href="css/style.css">
     <script src="jquery/jquery-2.1.4.js">
     <script src="bootstrap/js/bootstrap.js"></script>
     <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </head>
   <body>
   <div class="container-fluid">
@@ -21,6 +20,7 @@
       </p>
 
       <ul>
+        <li>Statements</li>
         <li>Variables</li>
         <li>Program Flow</li>
         <li>Functions</li>
@@ -37,30 +37,64 @@
         So lets start with some of the basic concepts. Variables and programming flow are kind of both needed at the same time for things to make any sense.
       </p>
 
-      <h1>Variables</h1>
+      <h1>Statements</h1>
       <p>
-        At the high level variables can be thought of as boxes with labels that contain data.
-        Lets use the common concept of a person and make some variables that can be attributed to a person.
-        
+        Lets start right at the begining, what is a statement? In the language we're going to look at C# it's everything between two semi-colons (;). These statements make up the 'sentances' of the code, you can combine multiple operations into a single statement, but you don't want them getting too long as it can be awkward to handle.
+        A single statement is not a single line of code either. In this code there are two statements;
       </p>
-
-      <ul>
-        <li>Name</li>
-        <li>Age</li>
-        <li>Phone Number</li>
-        <li>Email</li>
-      </ul>
-
+      <pre>
+      string name = "Beth";
+      int age =
+                26; </pre>
       <p>
-        Values can be assigned to these variables and then retrieved later, eg:
+        While the second line is a bit awkward it is still a single statement even though its goes over two lines. Multiline statements are something to be aware of as when a single statement gets too long it can make sense to break it up over multiple lines, or into multiple statements. For now though I'm just going to stick with simple statements that won't need multiple lines.
+      </p>
+      <h3>Declaration Statement</h3>
+      <p>
+      The statement shown above is called a declaration statement, as it declares that a variable exists, with a specific type and an optional starting value. Declaration statments have the general structure one of the two:
       </p>
       <pre class="cs">
-      var name = "Beth";
-      var age = 26; </pre>
+      VariableType1 variableName1;
+      VariableType2 variableName2 = startingValue;</pre>
+      <h1>Variables</h1>
       <p>
-        This is an example of setting some variables with some values, don't worry about the exact syntax just yet. Only note that there are different types of values as <code>"Beth"</code> is a word and <code>26</code> is a number.
+        At the high level variables can be thought of as boxes with labels that contain data. Each box has a type associated with it and that box can only store values that are of that type in it.
       </p>
-      So what's happening here, the values of <code>name</code> and <code>age</code> start off as <code>undefined</code>. Then as code that executes the equals (=) operator, the program sets the value of the variables with those names to the values on the right hand side.
+      <h3>Variable Types</h3>
+      There are two main groups of types, primative and complex (sometimes called compound types). Lets just look at primative types first:
+      <p>
+        Now what do they mean!? Well internally in the computer each of those are just ones and zeroes, generally made up of either 8, 16, 32 or 64 ones and zeroes (ones and zeroes are generallly called bits, eg: 32-bit, 64-bit, etc). So it's up to us as the programmer to say what we want to do with those bits or rather, what those bits mean.
+      </p>
+      For the sake of simplicity I will stick to using <code>int</code>, <code>float</code> and <code>bool</code> for now as the other values are pretty much just variations on those types anymway.
+      <ul>
+        <li><code>int</code>
+        <p>
+          int is short for integer which is the math term for a whole number, so no decimal points with this type. They are fast, small, accurate (if you're using whole numbers) and generally one of the most common types. In C# they are 32-bit which means they can store a value range between -2147483648 and 2147483647 or [-2^31, 2^31 - 1]. Why minus one? That's honestly not super important right now, but just know that there are rules associated with how the number is stored and limitations on the size of the numbers.
+        </p>
+        <p>
+          For example:
+          <pre>
+          int age = 26;
+          int year = 2015;
+          int pi = 3.14159; // &lt;-- Invalid! Because pi is not an integer value </pre>
+        </p>
+        </li>
+        <li><code>float</code>
+        <p>
+          float is short for floating point number, which just means that it's a number that can have a deciaml value. It's a number type that has a certain accuracy, so at large numbers, adding 1 to that large number will not do anything. Or in the reverse case, having a small number and then adding a really big number and then subtracting that big number will result in the small value you had being lost. Again the specifics are not important but know that there are limitations.
+        </p>
+        For example:
+        <pre>
+        float age = 26; // &lt;-- This is valid because 26 is the decimal number 26.0
+        float pi = 3.14159;
+        float bigNumber = 1000000000005; // &lt;-- This will be rounded to about 100
+        </pre>
+        </li>
+        <li><code>bool</code>
+        bool is short for boolean which I'm pretty sure is the name of the guy who invented Boolean math, which is the math based around true and false only values. So a bool can only store either true or false, there isn't really any other surprises with bools than that.
+        </li>
+      </ul>
+
       <table>
         <tr>
           <td>
@@ -68,9 +102,8 @@
           </td>
           <td class="mono">-&gt;</td>
           <td>
-            <code>
-              var name = "Beth";
-            </code>
+            <pre>
+string name = "Beth"; </pre>
           </td>
           <td class="mono">-&gt;</td>
           <td>
@@ -85,9 +118,8 @@
           </td>
           <td class="mono">-&gt;</td>
           <td>
-            <code>
-              var age = 26;
-            </code>
+            <pre>
+int age = 26; </pre>
           </td>
           <td class="mono">-&gt;</td>
           <td>
@@ -109,25 +141,26 @@
       <p>
         So on their own variables don't do anything, you need something to execute instructions. Code is often compared to recipe instructions which is pretty true, however instead of a person interpreting a list of relatively vague instructions you have a computer executing very precise instructions.
       </p>
-      Each line of code does one or more things, these are typically (depending on the language) anything between two semi-colons (;)
+      Each code statement does one or more things.
       For example:
       <pre>
-      var name = "Beth";
-      var age = 43;
-      var email = "example@what.com"; </pre>
-      Is the same as
-      <pre>
-      var name = "Beth"; var age = 43; var email = "example@what.com"; </pre>
+      string name = "Beth";
+      int age = 43;
+      string email = "example@what.com"; </pre>
+
       <p>
-        For the purposes of readability and sanity people will write their code so that each statement is on a new line, however if you see multiple statements on the same line it's still valid because it's the semi-colon's that actually separate the lines. You could say that semi-colon's are like periods (.) and that the whitespace around those is for organising things logically.
+        In this case, we have 3 declaration statements. Before any of this code has run the computer has no knowledge the variables <code>name</code>, <code>age</code> or <code>email</code>. As each declaration statement is executed it creates space in memory for each variable and puts the value on the right hand side (after the = sign) into the space owned by those variables.
       </p>
-      So each line is executed one after the other sequentially (not actually 100% true but for now you can assume that is the case). However to do anything complicated you need to be able to re-use and rerun code, or conditionally run code, etc. For doing these things there are control statements:
+      
+      <p>
+        So each statement is executed one after the other sequentially (not actually 100% true but for now you can assume that is the case). However to do anything complicated you need to be able to re-use and rerun code, or conditionally run code, etc. For doing these things there are control statements:
+      </p>
 
       <h3><code>if</code> statement</h3>
       The <code>if</code> statement is used to run code if a certain condition is met, eg:
       <pre>
-      var pingTime = 1000;
-      var status;
+      int pingTime = 1000;
+      string status;
       if (pingTime &gt; 500)
       {
           status = "laggy";
@@ -135,7 +168,9 @@
       else
       {
           status = "not too bad";
-      } </pre>
+      } 
+      Console.WriteLine(status);
+      </pre>
       <p>
         Assuming that the value of <code>pingTime</code> was set by something dynamic instead of something statically set in the code, you use this code to see the current status value about the ping time.
       </p>
@@ -148,14 +183,14 @@
       Now we're getting into some more complicated statements. The <code>for</code> loop is one of three looping statements but each are pretty much just for preference or easy of use in a given situation, all loops can be used interchangeably really. All loops follow the same basic structure, set some initial values, a condition to be met (like an <code>if</code> statement) and something to perform at the end of each loop iteration.
 
       <pre>
-      var total = 0;
-      for (var i = 0; i &lt; 10; i = i + 1)
+      int total = 0;
+      for (int i = 0; i &lt; 10; i = i + 1)
       {
           total = total + i;
-          console.info(total);
+          Console.WriteLine(total);
       } </pre>
       <p>
-        So what's going on here!? The <code>for</code> has the three parts to it, firstly is the <code>var i = 0;</code>, this creates a new variable just for this loop (not 100% true, this changes based on language but convention dictates that we assume that the <code>i</code> variable only exists in the for loop). We also have our condition <code>i &lt; 10;</code> which will allow the loop to run while <code>i</code> is less than 10. And finally we have our step <code>i = i + 1</code>, this is just another piece of code that is run each time the loop is executed.
+        So what's going on here!? The <code>for</code> has the three parts to it, firstly is the <code>int i = 0;</code>, this creates a new variable just for this loop (not 100% true, this changes based on language but convention dictates that we assume that the <code>i</code> variable only exists in the for loop). We also have our condition <code>i &lt; 10;</code> which will allow the loop to run while <code>i</code> is less than 10. And finally we have our step <code>i = i + 1</code>, this is just another piece of code that is run each time the loop is executed.
       </p>
       I've also used a function <code>console.info</code> functions are just more code but you can give them inputs, in this case I want to display the current <code>total</code> value to the screen somewhere. Assuming you ran this code in a browser you would see this output in the console.
       <pre>
@@ -181,17 +216,17 @@
       Functions are another key concepts in programming and the concept is entirely taken from the idea of math functions.
       Thinking back to math, sine, cosine and tan were all functions and using them in code would look like this:
       <pre>
-      var answer = sine(input); </pre>
+      double answer = sine(input); </pre>
       <p>
         Easy! So lets say we want to make our own function since we'll want to do that frequently. Lets make a really simple function that takes a number, increments the number and returns the new number.
       </p>
       <pre>
-      function addOne(input)
+      int addOne(int input)
       {
           return input + 1;
       }
-      var x = 5;
-      var y = addOne(x); </pre>
+      int x = 5;
+      int y = addOne(x); </pre>
       <p>
       So the value of <code>y</code> is now 6. Now there are several important things going on here: 
       <ol>
@@ -207,14 +242,14 @@
         Lets try a slightly more complicated function that takes two arguments (inputs).
       </p>
       <pre>
-      var z = 8;
-      function combine(x, y)
+      int z = 8;
+      int combine(int x, int y)
       {
           return x * y * z; 
       }
 
-      var x = 5;
-      var y = combine(x, 9); </pre>
+      int x = 5;
+      int y = combine(x, 9); </pre>
       <p>
       Now the value of <code>y</code> will be 360. You might notice that the names of variables have been used twice, however this doesn't cause problems because the variables inside the function 'shadow' the values outside the function. However variables outside the function can be referred to if a name hasn't been 'shadow'd as in the case of the <code>z</code> variable.
       </p>
@@ -249,5 +284,4 @@
 
   </div>
   </body>
-    <script>hljs.initHighlightingOnLoad();</script>
 </html>
