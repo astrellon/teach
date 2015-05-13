@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>First</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="highlight/styles/default.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="jquery/jquery-2.1.4.js">
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1>First</h1>
+      Programming!
+      Lets start with the basics:
+      <ul>
+        <li>Variables: These are labelled storage places for values.</li>
+        <li>Program Flow: Code is executed sequentially however there are ways of jumping around code, like choose your own adventures, sorta.</li>
+        <li>Functions: These organsise code into named blocks. Like the square root function, or the sine/cosine functions.</li>
+      </ul>
+      <p>
+        And now you can program!
+      </p>
+
+      <p>
+        Okay so lets look at some real (simple) code. This is come C# code, it the same stuff I use at work and the same stuff used by the Unity game engine to make games like Kerbal Space Program and Cities: Skylines. I decided that the most interesting that I can start with is the Unity engine, there are going to be more keywords and unknown things thrown at you from the tsart, but you'll be able to make interesting things almost straight away.
+      </p>
+      <p>
+        Okay so I need to explain briefly how Unity works, each thing in a Unity game is a GameObject, and each GameObject can have multiple components attached to it. These components can be different properties like the type of physics, does it emit light, does it have a hit box, etc. For now we're going to look at a 'Script' component which allows code to be added.
+      </p>
+
+      <p>
+        So I've already made a really simple Unity project that contains a cube, a plane, a light source and a camera. The cube already has a script added to it and we'll look at that and make some simple modifications to it.
+      </p>
+      <pre>
+using UnityEngine;
+
+public class MoveTheCube : MonoBehaviour {
+
+    // Use this for initialization
+    void Start () {
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+        // Add code here  
+        // So here we're moving the cube to the right every frame, however we don't want to do that
+        // independantly of the framerate otherwise it'll move really fast. So we multiply the time difference
+        // between each frame then after 1 second the cube will have moved by 1 unit.
+        transform.position += Vector3.right * Time.deltaTime;
+    }
+}</pre>
+      <p>
+        Alright so there's actually quite a lot of stuff going on here behind the scenes, but for now let's just look at the <code>transform.position</code> code since that's the line doing something interesting (well relatively speaking).
+      </p>
+
+      <p>
+        All the code within the <code>{  }</code> in the <code>void Update ()</code> function will be run every game frame. so as we're moving the boxes position every frame it should move across the screen to the right
+      </p>
+
+      <p>
+        As you're aware, while a game is running it has a frame rate. This is the rate at which the game program is able to handle all the user input, calculate physics, process AI, update sounds and redraw the screen. Most of the time we want the game to be able to do all that 60 times a second. Which means each frame has at most 16ms to execute, and in practise it's closer to 10ms once to take lag to the screen into account. So the time between each from is what <code>Time.deltaTime</code> is equal to, ideally it'll be something below 10ms in value (or 0.01 in seconds). 
+      </p>
+
+      <h3>Phase Two</h3>
+      <p>
+        So running this you should see that it doesn't take much code to make a box move slowly and at a constant speed to the right. However that's not really a game, so lets make things crazy and get some user input!
+      </p>
+
+      <p>
+        So lets change the code to look like this
+      </p>
+      <pre>
+if (Input.GetKey(KeyCode.A))
+{
+    transform.position -= Vector3.right * Time.deltaTime;
+}
+else if (Input.GetKey(KeyCode.D))
+{
+    transform.position += Vector3.right * Time.deltaTime;
+}</pre>
+      <p>
+        Now the cube should move to the left when the A key is down, and to the right when the D key is down. Already we have something that is comparitively more of a game that the last thing.
+      </p>
+
+    </div>
+  </body>
+</html>
