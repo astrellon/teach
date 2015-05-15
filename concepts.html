@@ -127,13 +127,15 @@
     <h1>Casting (or type conversion)</h1>
     <div>
       <p>
-        With all these different types often you're going to need to combine different types together, like adding an <code>int</code> to a <code>double</code>. In some cases values will be converted for you where it makes sense to the computer, usually when combining a type that can hold a small balue being added to a variable that can hold a larger variable and it'll cast the smaller type up to the larger type. However if you're going the other way you need to explicitly cast, this is pretty much telling the computer that you know what you're doing and that you know that potentially going to a smaller variable type might result in data being lost.
+      With all these different types often you're going to need to combine different types together, like adding an <code>int</code> to a <code>double</code>. In some cases values will be converted for you where it makes sense to the computer, usually when combining a type that can hold a small balue being added to a variable that can hold a larger variable and it'll cast the smaller type up to the larger type. However if you're going the other way you need to explicitly cast, this is pretty much telling the computer that you know what you're doing and that you know that potentially going to a smaller variable type might result in data being lost.
       </p>
-        <p>
-          For example:
-        </p>
-        <pre>
-        int age = 56.7; // &lt;-- Invalid
+      <p>
+      For example:
+      </p>
+      <pre>
+        double ageWithDecimal = 56.7;
+        int age = ageWithDecimal; // &lt;-- Invalid as double to int will loose data so you need to explicitly say that it's all good.
+        age = (int)ageWithDecimal // &lt;-- Valid and will drop the decimal part (not round) so it will be 56, not 57.</pre>
     </div>
 
     <h1>Program Flow</h1>
@@ -169,8 +171,7 @@
       {
           status = "not too bad";
       } 
-      Console.WriteLine(status);
-      </pre>
+      Debug.Log(status); </pre>
       <p>
       Assuming that the value of <code>pingTime</code> was set by something dynamic instead of something statically set in the code, you use this code to see the current status value about the ping time.
       </p>
@@ -187,12 +188,12 @@
       for (int i = 0; i &lt; 10; i = i + 1)
       {
           total = total + i;
-          Console.WriteLine(total);
+          Debug.Log(total);
       } </pre>
       <p>
       So what's going on here!? The <code>for</code> has the three parts to it, firstly is the <code>int i = 0;</code>, this creates a new variable just for this loop (not 100% true, this changes based on language but convention dictates that we assume that the <code>i</code> variable only exists in the for loop). We also have our condition <code>i &lt; 10;</code> which will allow the loop to run while <code>i</code> is less than 10. And finally we have our step <code>i = i + 1</code>, this is just another piece of code that is run each time the loop is executed.
       </p>
-      I've also used a function <code>console.info</code> functions are just more code but you can give them inputs, in this case I want to display the current <code>total</code> value to the screen somewhere. Assuming you ran this code in a browser you would see this output in the console.
+      I've also used a function <code>Debug.Log</code> functions are just more code but you can give them inputs, in this case I want to display the current <code>total</code> value to the screen somewhere. Assuming you ran this code in a browser you would see this output in the console.
       <pre>
       0
       1
@@ -221,12 +222,12 @@
       Easy! So lets say we want to make our own function since we'll want to do that frequently. Lets make a really simple function that takes a number, increments the number and returns the new number.
       </p>
       <pre>
-      int addOne(int input)
+      int AddOne(int input)
       {
           return input + 1;
       }
       int x = 5;
-      int y = addOne(x); </pre>
+      int y = AddOne(x); </pre>
       <p>
       So the value of <code>y</code> is now 6. Now there are several important things going on here: 
       <ol>
@@ -243,45 +244,49 @@
       </p>
       <pre>
       int z = 8;
-      int combine(int x, int y)
+      int Combine(int x, int y)
       {
           return x * y * z; 
       }
 
       int x = 5;
-      int y = combine(x, 9); </pre>
+      int y = Combine(x, 9); </pre>
       <p>
       Now the value of <code>y</code> will be 360. You might notice that the names of variables have been used twice, however this doesn't cause problems because the variables inside the function 'shadow' the values outside the function. However variables outside the function can be referred to if a name hasn't been 'shadow'd as in the case of the <code>z</code> variable.
       </p>
       </p>
     </div>
     <div>
-      <h1>Value Types</h1>
-      Now that we hopefully have some basic concept of variables, assigning the value of variables and some basic program flow, here are some more information about variables.
-      As you saw above there are different types of values, for example <code>"Beth"</code> is a string, short for a string of characters, and <code>26</code> is a number.
-
+      <h1>Classes</h1>
       <p>
-      Now there are generally a few basic primative types that are going to be common to nearly all languages as they relate to how CPUs work generally.
+        So we've seen primative variable types but to do anything complicated we need more complicated types, for that we have classes. A class is a compound type that a developer can define themselves.
       </p>
-      <ul>
-        <li>Number (usually split into integer and decimal types, but not always)</li>
-        <li>Boolean (true or false values only)</li>
-      </ul>
-      There are also more complex compound types that are essentially just a combination of those twos wrapped into one type, for example a Person type might look like this:
-      <pre>
-      var person = {
-          name: "Beth",
-          age: 26,
-          email: "email.com"
-      };
-      console.info("Person: ", person.name, person.age, person.email); </pre>
-      This would print to the console:
-      <pre>
-      Person: Beth 26 email.com </pre>
       <p>
-      Now here's where things can get tricky to explain as all my example have been in Javascript for simplicity and the ability to use a browser for doing any code tests. However Javascript does like to do things a bit differently from other languages so while the concepts are still the same, the way things are done in the code might appear quite different so bare that in mind.
+        Lets look at a simple class:
       </p>
+      <pre>
+      class Sword
+      {
+          public int MaxDamage;
+          public int MinDamage;
+          public string Name;
+      }</pre>
+      <p>
+        This is a really simple representation of a sword item. We can use this class like this:
+      </p>
+      <pre>
+      var sword = new Sword();
+      sword.MaxDamage = 2;
+      sword.MinDamage = 1;
+      sword.Name = "Wooden Sword";
 
+      var output = string.Format("{0}: {1} - {2}", sword.Name, sword.MinDamage, sword.MaxDamage);
+      Debug.Log(output);</pre>
+      This will output to the console:
+      <pre>Wooden Sword: 1 - 2</pre>
+      <p>
+        So there are a few differences with classes as we can see. Firstly to use one we need to <code>new</code> an instance of the Sword class. Classes are created in a different part of the memory and you basically are asking for enough RAM required to fit an instance of the Sword class. In this case the Sword class does not take up much space but the size doesn't matter (not for the most part anyway).
+      </p>
     </div>
-    </body>
-    </html>
+  </body>
+</html>
