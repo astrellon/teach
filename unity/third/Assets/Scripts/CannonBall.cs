@@ -2,16 +2,11 @@
 
 public class CannonBall : MonoBehaviour
 {
+	public GameObject ExplosionPrefab;
 
-	// Use this for initialization
-	void Start ()
-    {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
+	void OnCollisionEnter(Collision collision)
+	{
+		Instantiate (ExplosionPrefab, transform.position, Quaternion.identity);
+		Destroy(gameObject);
 	}
 }
