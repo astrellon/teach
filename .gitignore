@@ -26,6 +26,7 @@ obj/
 # ============= #
 *.swp
 *.swo
+.undodir
 
 # ============ #
 # OS generated #

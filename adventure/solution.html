@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>It's Adventuring Time!</title>
+    <script src="solution.js"></script>
+    <link rel="stylesheet" href="solution.css"/>
+  </head>
+  <body>
+    
+    <div>
+      <h1>Welcome to Adventure!</h1>
+      <p>
+        This is an example of a really simple text adventure game.
+      </p>
+    </div>
+    
+    <div id="name-input">
+      <p>
+        Before we begin, please enter your name
+        <input id="player-name-input" type="text" placeholder="Adventuring Joe"/>
+        <button onclick="startGame();">Start</button>
+      </p>
+    </div>
+
+    <div id="game-world" class="hide">
+      <h2>Game World</h2>
+      <div id="game-world-text">
+      </div>
+      <input id="player-action" type="text" placeholder="Player Action" onkeydown="onPlayerActionEnter(event);"/>
+    </div>
+
+  </body>
+</html>
+
