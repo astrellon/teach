@@ -1,8 +1,15 @@
+body {
+    font-family: sans;
+}
 .hide {
     display: none;
 }
 
 .action {
     margin-top: 6px;
+    font-weight: bold;
+}
+
+.game-time {
     font-weight: bold;
 }
