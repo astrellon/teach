@@ -44,7 +44,7 @@ function startGame()
     gameWorldEl.classList.remove('hide');
 
     // Display some initial game text
-    addGameWorldText('Welcome to the adventure ' + playerName);
+    addGameWorldText('Welcome to the adventure ' + playerName + '!');
     addGameWorldText('Simply type what you want to do and press enter.');
 
     // Move to the first room
@@ -172,6 +172,11 @@ function onPlayerActionKeydown(event)
         return;
     }
 
+    grabPlayerAction();
+}
+
+function grabPlayerAction()
+{
     var playerActionEl = document.getElementById('player-action');
     // Don't do anything if the player hasn't typed anything.
     if (playerActionEl.value.length === 0)
