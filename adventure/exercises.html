@@ -15,21 +15,145 @@
     <div class="container-fluid">
       <h1>Adventure Exercises</h1>
       <div>
-        <h2>Simple Beginnings</h2>
+        <h2>Introduction</h2>
         <p>
-          Alright! Lets aim to make a super simple text adventure game! Don't worry, this doesn't require any fancy. The solution I've made is considered 'complete', in that I've taken many different combinations of game state into account that aren't really necessary.
+          Alright! Lets aim to make a super simple text adventure game! Don't worry, this doesn't require any fancy. I've made solutions for each exercise along with one that is considered 'complete', in that I've taken many different combinations of game state into account that aren't really necessary.
         </p>
+        So let's have a quick look at what is required from a text adventure game.
+        <ul>
+          <li>Somewhere to output text to.</li>
+          <li>Somewhere for the player to give input to.</li>
+          <li>Text adventures are usually segmented into different locations, in this case I'm going to refer to them as rooms.  </li>
+          <li>Objects in the game have different states, like is a door opened or closed. Or does the player currently have a certain item in their possession.</li>
+          <li>Some way of progressing through the rooms to a winning state (or losing state).</li>
+          <li>And for a real game a story of some kind is probably a good idea. I really haven't put in much of a story.</li>
+        </ul>
+        <p>
+          From this high level look at what's needed we can start to write down some more detail about how things should work. For this exercise I'm going to layout the progression through the game, but as a creative exercise you can always make your own.
+        </p>
+        <h3>Level Layout</h3>
+        <p>
+          So using the concept of a room, we'll make three different rooms, with the winning state being triggered when the player reaches the third room. Which means in reality we only need to program two rooms. 
+        </p>
+        <b>
+          First Room:
+        </b>
+        <ul>
+          <li>Starting location</li>
+          <li>One closed door to the north that leads to the second room.</li>
+          <li>The player must open the door before moving forwards. If the door is still closed we should sarcastically inform the player.</li>
+        </ul>
+        <b>
+          Second Room:
+        </b>
+        <ul>
+          <li>The player can return the first room.</li>
+          <li>There is another door to the north that is both closed and locked.</li>
+          <li>There is a key somewhere in the room (I'm putting it on a table) that must be used to unlock the door before opening the door.</li>
+        </ul>
+        <b>
+          Third Room:
+        </b>
+        <ul>
+          <li>Winning state.</li>
+          <li>I'm calling this room outside with the epic saga concluding that the player was able to leave their house.</li>
+          <li>At this point no action is available to the player before the game is over.</li>
+        </ul>
+
+        <h3>Game State</h3>
+        So what do we need to keep track of to make this game work?
+        <ul>
+          <li>The players current location/room.</li>
+          <li>Is the first door open?</li>
+          <li>Is the second door open?</li>
+          <li>Is the second door unlocked?</li>
+          <li>And does the player have the key?</li>
+        </ul>
+        That's is, 4 booleans (true/false values) and a string to indicate the room ('first'/'second'/'outside' is what I'll be using).
+
+        <h3>Player Input</h3>
+        <p>
+          Each action the player can take should be in the form of a simple verb and noun, such as 'open door' or 'take key'. We can always use more complicated phrases such as 'pick up the key on the table' however for simplicity I'm going to keep the actions short.
+        </p>
+        <p>
+        So there are two main ways of getting player input, using the prompt function, or using a <b>&lt;input type="text"&gt;</b>. I'm going to be using a input tag, however this is just personal preference.
+        </p>
+        Something like this:
+        <p>
+          <input type="text" placeholder="Player Action">
+          <button>Go</button>
+        </p>
+
+        <h4>Handling Player Input</h4>
+        Player input actions are going to be pretty basic, ie 'open door', 'go north', etc. The easiest way to do something based off the user input is to just use an if statement.
+        <pre>
+if (action === 'open door')
+{
+    // Open the door?
+}
+else if (action === 'go north')
+{
+    // Go north?
+}</pre>
+        Without going into too much detail, handling the player input isn't going to be any more complicated than this!
+
+
+        <h3>Game Output</h3>
+        <p>
+          We'll need some way of displaying information to the player. Again there are many different ways of doing this. I'm going to take a relatively easy route of adding new <b>&lt;div&gt;</b> elements to the page that contain the information, along with the action the player gave. I'll show you how to do this in Javascript, don't worry it's pretty easy.
+        </p>
+        So we're aiming to get something that looks like this:
+        <div>
+          <b>look:</b>
+          <div>Looking around the room, you see important details that you should pay attention to.</div>
+        </div>
+
+      </div>
+
+      <div>
+        <h2>01 - Simple Beginnings</h2>
         So first thing we'll need is some basic UI to test with and some extra files. So we'll need:
         <ul>
           <li>A blank adventure.js file and script tag linking it.</li>
           <li>A blank adventure.css file and a link tag linking it.</li>
           <li>A nice big header welcoming the player to adventure.</li>
-          <li>An input for getting the players name.</li>
           <li>A button (or some other way) for starting the game.</li>
+          <li>A container for adding game text to.</li>
         </ul>
-        Here we're basically creating the skeleton of the game.
+        Here we're basically creating the skeleton of the game. No functionality needs to be added yet, but some id's should be put onto contains and the input where it makes sense.
+        There is a solution for this starting part if you want to make sure that things are happening correctly. In the 01-beginnings folder.
+    </div>
 
-        
+    <div>
+      <h2>02 - Some Code</h2>
+      <p>
+        Now that we have a basic outline of the html that we'll need. We're going to add to it as needed, but all the important parts are there already.   
+      </p>
+      <h3>Start Game Function</h3>
+      <p>
+        When the player clicks the start button we'll want to add some text to the game world container indicating that the game has started. 
+      </p>
+      <p>
+        Here is how you can create new elements and add it to an element with the id "game-world-text" 
+      </p>
+      <pre>
+function addGameWorldText(text)
+{
+    var gameWorldTextEl = document.getElementById('game-world-text');
+
+    // This creates a new element. Until it is added to something already in the page
+    // it'll just be floating no-where and won't appear.
+    var newEl = document.createElement('div');
+    // Setting the innerHTML allows you to change the raw html inside that element.
+    newEl.innerHTML = text;
+
+    // Now that the element has been created and its html set we can add it 
+    // to the game world text container.
+    gameWorldTextEl.appendChild(newEl);
+}</pre>
+      <p>
+        Using this function you should be able to add some text to the game world when the game starts.
+      </p>
     </div>
   </body>
 </html>
