@@ -231,5 +231,77 @@ function processPlayerAction(action)
     </ul>
     There should also be a fallback if the action isn't one of those and tell the player something along the lines of <code>I don't know how to action</code>.
     </div>
+
+    <h2>04 - Game State</h2>
+    <div>
+      Now that we have output and input and some basic way of handling player input then really we just need to add more stuff at the moment.
+      <p>
+        Lets review our goal for the game:
+      </p>
+      <ul>
+        <li>The players current location/room.</li>
+        <li>Is the first door open?</li>
+        <li>Is the second door open?</li>
+        <li>Is the second door unlocked?</li>
+        <li>And does the player have the key?</li>
+      </ul>
+      So we have 4 booleans (true/false) and 1 string for the current room. So lets make sure that we have these variables in the code.
+      <pre>
+var currentRoom = 'no-where';
+
+// Variables for first room
+var firstDoorOpen = false;
+
+// Variables for second room;
+var secondDoorOpen = false;
+var secondDoorLocked = true;
+var secondKey = false;</pre>
+      <p>
+        So what we need is a way to change these values based on player action, and to have these values affect the outcome of player action.
+      </p>
+      <p>
+        Lets use the first room's door as an example.
+      </p>
+      <pre>
+if (currentRoom === 'first')
+{
+    if (action === 'open door')
+    {
+        if (firstDoorOpen)
+        {
+            addGameWorldText('The door is already open you clod.');
+        }
+        else
+        {
+            firstDoorOpen = true;
+            addGameWorldText('The door opens with a bit of effort.');
+        }
+    }
+    else if (action === 'go north')
+    {
+        if (firstDoorOpen)
+        {
+            addGameWorldText('You leave the dusty room behind.');
+            currentRoom = 'first';
+        }
+        else
+        {
+            addGameWorldText('Attempting to leave the door through a closed door fails.');
+        }
+    }
+} </pre>
+    <p>
+      Now that's a fair chunk of code, but it's all if statements, adding output to the game text and changing values. Also this code will only run when in the first room. Once the player goes to the second room it will not run.
+    </p>
+    <p>
+      As an exercise you should implement the code for the second room, making sure that it follows this logic:
+    </p>
+  <ul>
+    <li>The player cannot go north until the door is open.</li>
+    <li>The door cannot be open while it is locked.</li>
+    <li>The door cannot be unlocked until the key has been picked up.</li>
+  </ul>
+
+    </div>
   </body>
 </html>
