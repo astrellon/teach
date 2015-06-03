@@ -294,14 +294,17 @@ if (currentRoom === 'first')
       Now that's a fair chunk of code, but it's all if statements, adding output to the game text and changing values. Also this code will only run when in the first room. Once the player goes to the second room it will not run.
     </p>
     <p>
+      The first room will also need a 'look' action for describing what it looks like and giving some sort of direction about what the player should do next. eg: 'There is a closed door to the north'.
+    </p>
+    <p>
       As an exercise you should implement the code for the second room, making sure that it follows this logic:
     </p>
-  <ul>
-    <li>The player cannot go north until the door is open.</li>
-    <li>The door cannot be open while it is locked.</li>
-    <li>The door cannot be unlocked until the key has been picked up.</li>
-  </ul>
-
+    <ul>
+      <li>The player cannot go north until the door is open.</li>
+      <li>The door cannot be open while it is locked.</li>
+      <li>The door cannot be unlocked until the key has been picked up.</li>
+    </ul>
+    If you get stuck, there will be a more complete solution in the next exercise.
     </div>
   </body>
 </html>

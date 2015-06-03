@@ -6,7 +6,7 @@ var currentRoom = 'no-where';
 // Variables for first room
 var firstDoorOpen = false;
 
-// Variables for second room;
+// Variables for second room
 var secondDoorOpen = false;
 var secondDoorLocked = true;
 var secondKey = false;
