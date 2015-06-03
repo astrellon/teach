@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Adventure</title>
+    <link rel="stylesheet" href="adventure.css"/>
+    <script src="adventure.js"></script>
+  </head>
+
+  <body>
+    <h1>Welcome to Adventure</h1>
+
+    <div id="start-game">
+      Start the adventure!
+      <button onclick="startGame()">Start</button>
+    </div>
+
+    <div id="game-world" class="hide">
+      <div id="game-world-text">
+      </div>
+      <input type="text" id="player-action" placeholder="Player Action"/>
+      <button onclick="onGoClick()">Go</button>
+    </div>
+
+  </body>
+</html>

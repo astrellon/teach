@@ -36,8 +36,8 @@ function startGame()
     gameStarted = true;
 
     // Hide the name input, prevents the player from inputting their name twice.
-    var nameInputEl = document.getElementById('name-input');
-    nameInputEl.classList.add('hide');
+    var startGameEl = document.getElementById('start-game');
+    startGameEl.classList.add('hide');
 
     // Show game world now that we have a player now.
     var gameWorldEl = document.getElementById('game-world');

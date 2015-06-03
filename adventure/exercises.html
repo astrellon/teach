@@ -10,6 +10,32 @@
     <script src="../common/bootstrap/js/bootstrap.js"></script>
     <script src="../common/highlight/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+    <style>
+    @-webkit-keyframes move-background {
+      from { background-position-x: 0; }
+      to {background-position-x: 128px; }
+    }
+    .congrats {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image:
+      url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAgCAYAAADaInAlAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYDDAMKcKsdrQAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAUASURBVHjavVvLbhtBDBMXzSVt//9DmwLNJewlBfYhidTspgaM2LuOR6ORKIozBiMYPyKs5/eI+Cnef77+8y3iV0T8juPft8/n/vrb6XX1fI8X09C9MYWB/+59vNYGVca+aaNfP9ZcuL/2/WhpvMR74lHlwd6zW0weaN7zeI3G1+B0jbH6YDEKcuP219EYVN1zhhdzZzFvFmaw/IRjQH1/W/o/7u4x8TeuE2IyGSbOoTUlisg8G4nk9SlSKebbDYt5yMKYCZYyk00iOAFA43tVZvB6G6bfPJ866Qjh2iSTcC+7V3ALp/hjEcZIFxNJhM6icWsX3ckGkbJs3nMMWG42sHBv8jkkH61SFc8HBJNqk91j6RkWme5h6VYGkkIF+FVHgbGf3xwEAQznoL7EBfAZshUkPuhLAAQcz7F0s/4HoswkYZuVAJrVew36HW6QIAOTudGMHzM+FcDCAFvImk9zcVwSOEk2XleaCalTPqQ9/CQ9WWTQLlLP9sNEQXMlJ2GbcYG6BND0Zm3JZicbG7qOK87D6B45gr8pblBgj5GyaJjZWteVLhsKUMcleTBASVjG+ToAihYQdf1kQWr4ZYSbZkdQGFX1pPC/bjKc6oxYmsekPmHQx3IYAKq1xDVbaLQ+KCrzvQ6gM5LXHhZNSqLp126EJpsqzmLIfAEgoDkLr6NfNtuvFJlx8i0aYFJw90zm05sIxTwzzeOG8IPCN5SSzRQrPda+WQiqyHWSbFmUYziFWUOl1C/m4IomedCk50MikdN9og3kaLysxCEWbeC0R2OdfBiIk7MyMOXWRV9XSdps0PMGEtyTFZgwAxRF1KlVEFKwCjqxB8PoNz0e1liaCiooJ8w2hM/g1YQb9GIQGshfEYKUUoHG1yeoRMN++YDjPD2ATW93alfcAH8w02lKCrQzshJnpkLQZJUKLZMJana6dxi0TS+0W8MKC1Rb8gDkU7iOtu6UlYEQPYQrBDl0tKqVyTg0tat5nWT4uzRDCjppS+gvvjpSgda9K61JX3y3R/Ftt7odjwo7PqcNlloNCIg0KgiFaDREs5mYSxOu1Vb4NAA4XwsKBGhi50bkqTAqdiaUNq2+3jhaoIoUGo2k9guFUZTUexv52Vkhan2ORj3kXQiyWK0oxIob0IcuiHA8D892CGcR0Ch3rhDUaS4sOgBDioHh67WzFzAitjB2InrNRYtxUOSVXTeJo1IXIYSgDs/Qr+DK3v990t1V3kYY6gKcRiDcaBkriSrX1jrG3W2ErR4KVRaLLJhsXj7TcndCBXJ8qXpTDCkH1kNUAasOG5oKw0QHcKSqitay56iMeudrLdtpwpYACBrMzFlszvGp6q6PvmkCWRJeDnUAxeBC9HlR73A9sLlmwmDHC9ATOed09BD6FKunoHB16mTHR5SXuVgCsiNUA+rw/x5ql/3TQleL5XMT6Q6DVK5FSZEdBbCe4GZhFUV5KSDUPaL53IJD5F1TN7v9atQot7J/MEmMY7VXmYfxKN4vg2BC5W5V1Y78vXbPoZMw8LzpWWFmvmhd1OJSDHVEBUR3ZHTlJOtmwV+I5EqcQCEhfF2pcFgbrp0Aoz6Se6MsqCSogAUtAiC849+aXW3Sl4poNgGpqrA6te8Fw6SQUMuV7i+BsCYKrf7GFJZSIn6vd0sKrpQdDAQqY3GxlPGuSlM4CAWxdjnVoiLYHUbqc9jdaclODx/v/wWE67xpkKBH9gAAAABJRU5ErkJggg==);
+
+      -webkit-animation: move-background 2s linear 0s infinite;
+
+      font-weight: bold;
+      text-transform: uppercase;
+
+      transition: all 0.5s ease-out;
+      -webkit-transform: translateZ(0);
+    }
+    .congrats:hover {
+      font-size: 2.5em;
+      -webkit-animation-duration: 1s;
+      -webkit-transform: rotateZ(360deg);
+    }
+    </style>
   </head>
   <body>
     <div class="container-fluid">
@@ -188,7 +214,7 @@ function addGameWorldText(text)
       <p>
         So unlike the <b>Start</b> button which directly calls the <code>startGame</code> function, the <b>Go</b> button needs to do a bit more to get the player action input and then off-load the handling of that action to something else. So we're going to create an <b>onGoClick</b> function for the <b>Go</b> button to call.
       </p>
-      We want to grab the value of the player-action input, do nothing if nothing has been inputted, or handle the input and clear the input field.
+      We want to grab the value of the player-action input, do nothing if nothing has been entered, or handle the input and clear the input field.
       <pre>
 function onGoClick()
 {
@@ -247,7 +273,7 @@ function processPlayerAction(action)
       </ul>
       So we have 4 booleans (true/false) and 1 string for the current room. So lets make sure that we have these variables in the code.
       <pre>
-var currentRoom = 'no-where';
+var currentRoom = 'first';
 
 // Variables for first room
 var firstDoorOpen = false;
@@ -305,6 +331,52 @@ if (currentRoom === 'first')
       <li>The door cannot be unlocked until the key has been picked up.</li>
     </ul>
     If you get stuck, there will be a more complete solution in the next exercise.
+    </div>
+
+    <div>
+      <h2>05 - Some Style</h2>
+      <p>
+        Now we've got some things happening, we might want to make it look ever so slightly better looking. We can also take this opportunity to actually make starting the game mean something. As I'm sure you're aware but starting the game just outputs some text to the screen, it doesn't really start anything. Also we aren't outputting the player action to the game text either, but we'd want that to stand out slightly from the rest of the text, because why not.  
+      </p>
+      <p>
+        So we need to have a way of identifying the div container that has the game-world-text and player action inputs. Lets set the id of that div to 'game-world'. This will allow us to refer to it in code. In addition we should make a CSS class that allows us to hide the game-world when the page loads and then we can remove that hiding class when the game is started to reveal the game world.
+      </p>
+      <p>
+        So how does one add and remove CSS classes?
+        <pre>
+var gameWorldEl = document.getElementById('game-world');
+gameWorldEl.classList.remove('hide');
+
+var startWorldEl = document.getElementById('start-game');
+startWorldEl.classList.add('hide');</pre>
+      </p>
+
+      <p>
+        Running the code above when the game starts will hide the start-game elements and show the game-world if the correct id's have been set onto the elements. Refer to the solution 05-style if this isn't making sense.
+      </p>
+
+      <p>
+        We should also take this time to add the player actions to the game world text, but we want it to look slightly different in some way. So make a copy of the <code>addGameWorldText</code> function and call the new function <code>addPlayerActionText</code>. This function is going to be the same except we're going to apply what we learnt about adding classes to elements here as well. We want to add a class to the new action div elements and then make a class in the CSS that makes the player action stand out in some way. It can be as simple as <code>font-weight: bold;</code>.
+      </p>
+      We'll also need to call the <code>addPlayerActionText</code> function from the <code>onGoClick</code> function just before the <code>processPlayerAction</code> function is called.
+    </div>
+
+    <div>
+      <h2>06 - Winning State</h2>
+      <p>
+        Now the player has a way of starting the game and progressing through the rooms, we need a way to end the game as well. This can be as simple as having another element in the html that states that the player has won that's hidden at the start and then shown.
+      </p>
+      Where you have whatever code that allows the player to successfully move beyond the second room, all you need to do is hide the <b>game-world</b> element show the <b>winner</b> element.
+    </div>
+
+    <div>
+      <h2>Conclusion</h2>
+      <p>
+        If you've made it this far and understood what was going on then <span class="congrats">congratulations</span>! You've just made a simple text adventure game! If you're not completely bored of the text adventure game feel free to checkout my solution which does have a few differences. Mostly in the way I've slightly re-organised a few things into more functions. And I don't have a "Go" button, instead pressing Enter allows the player to input an action (Madness!). My winning state is shown in the game world text instead of a different element. Just showing some different ways of approaching things.
+      </p>
+      <p>
+        Hopefully you've learnt something about how to make a basic text adventure and a really basic game. Also think about how if we kept the current structure (lots of if statements, a bunch of variables at the top of the file) but scaled the game size up to something that's supposed to be played for many hours. Does it seem like things would be unmanageable fairly quickly? Because I think things would get crazy! So at some point I'll need to show you how to organise things in an even better way beyond just some functions and variables. However it's not like there's anything wrong with the approach we've taken here for something of this scale, with experience comes the knowledge when more complex yet more maintainable structures are needed and when they are not.
+      </p>
     </div>
   </body>
 </html>
