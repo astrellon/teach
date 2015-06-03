@@ -19,14 +19,38 @@
         <p>
           Alright! Lets aim to make a super simple text adventure game! Don't worry, this doesn't require any fancy. I've made solutions for each exercise along with one that is considered 'complete', in that I've taken many different combinations of game state into account that aren't really necessary.
         </p>
-        So let's have a quick look at what is required from a text adventure game.
+        First though let's run down the different aspects of games in general. We'll look at what actually relates to text adventure games next.
         <ul>
-          <li>Somewhere to output text to.</li>
-          <li>Somewhere for the player to give input to.</li>
-          <li>Text adventures are usually segmented into different locations, in this case I'm going to refer to them as rooms.  </li>
-          <li>Objects in the game have different states, like is a door opened or closed. Or does the player currently have a certain item in their possession.</li>
-          <li>Some way of progressing through the rooms to a winning state (or losing state).</li>
-          <li>And for a real game a story of some kind is probably a good idea. I really haven't put in much of a story.</li>
+          <li><b>Graphics:</b> 3D/2D/Text</li>
+          <li><b>Sound:</b> 3D/2D/Mono/None</li>
+          <li><b>Input:</b> Keyboard and/or mouse/Game controller.</li>
+          <li><b>Physics:</b> Simulation quality/3D/2D/None.</li>
+          <li><b>Story:</b> Lots/Some/None</li>
+          <li><b>Progression:</b> So many different options </li>
+          <li><b>Saving and Loading:</b> Yes/No</li>
+          <li><b>Multiplayer:</b> Online/Local/None</li>
+        </ul>
+        <p>
+          So that's a lot of things, and there are many more smaller details to figure out about how your game is going to work. Thankfully for a text adventure most of those things can be ignored by design, and we'll ignore several more because we're keeping things simple.
+        </p>
+        <p>
+          So let's have a quick look at what is required from a text adventure game, and specifically our simple text adventure.
+        </p>
+        <ul>
+          <li><b>Graphics:</b> Text</li>
+          <li><b>Sound:</b> None</li>
+          <li><b>Input:</b> Keyboard</li>
+          <li><b>Physics:</b> None</li>
+          <li><b>Progression:</b> 
+          <ul>
+            <li>Text adventures are usually segmented into different locations, in this case I'm going to refer to them as rooms.</li>
+            <li>Objects in the game have different states, like is a door opened or closed. Or does the player currently have a certain item in their possession.</li>
+            <li>Some way of progressing through the rooms to a winning state (or losing state).</li>
+          </ul>
+          </li>
+          <li><b>Store:</b> Bare minimum!</li>
+          <li><b>Saving and Loading:</b> No</li>
+          <li><b>Multiplayer:</b> None</li>
         </ul>
         <p>
           From this high level look at what's needed we can start to write down some more detail about how things should work. For this exercise I'm going to layout the progression through the game, but as a creative exercise you can always make your own.
@@ -35,25 +59,19 @@
         <p>
           So using the concept of a room, we'll make three different rooms, with the winning state being triggered when the player reaches the third room. Which means in reality we only need to program two rooms. 
         </p>
-        <b>
-          First Room:
-        </b>
+        <b> First Room: </b>
         <ul>
           <li>Starting location</li>
           <li>One closed door to the north that leads to the second room.</li>
           <li>The player must open the door before moving forwards. If the door is still closed we should sarcastically inform the player.</li>
         </ul>
-        <b>
-          Second Room:
-        </b>
+        <b> Second Room: </b>
         <ul>
           <li>The player can return the first room.</li>
           <li>There is another door to the north that is both closed and locked.</li>
           <li>There is a key somewhere in the room (I'm putting it on a table) that must be used to unlock the door before opening the door.</li>
         </ul>
-        <b>
-          Third Room:
-        </b>
+        <b> Third Room: </b>
         <ul>
           <li>Winning state.</li>
           <li>I'm calling this room outside with the epic saga concluding that the player was able to leave their house.</li>
@@ -102,12 +120,13 @@ else if (action === 'go north')
         <p>
           We'll need some way of displaying information to the player. Again there are many different ways of doing this. I'm going to take a relatively easy route of adding new <b>&lt;div&gt;</b> elements to the page that contain the information, along with the action the player gave. I'll show you how to do this in Javascript, don't worry it's pretty easy.
         </p>
-        So we're aiming to get something that looks like this:
+        <p>
+          So we're aiming to get something that looks like this:
+        </p>
         <div>
           <b>look:</b>
           <div>Looking around the room, you see important details that you should pay attention to.</div>
         </div>
-
       </div>
 
       <div>
@@ -152,8 +171,65 @@ function addGameWorldText(text)
     gameWorldTextEl.appendChild(newEl);
 }</pre>
       <p>
-        Using this function you should be able to add some text to the game world when the game starts.
+        Using this function you should be able to add some text to the game world when the game starts. 
       </p>
+
+      <h3>Starting the game once</h3>
+      <p>
+        So right now you should have a button that when pressed is outputting some text to the game world container using something similar to the <code>addGameWorldText(text)</code> above. Really we want to only start the game once. So lets add a variable to track that the game has started. So the <code>startGame</code> function should check if the game has started already and then do nothing, otherwise start the game and change the value the game started variable.
+      </p>
+    </div>
+
+    <div>
+      <h2>03 - Player Input</h2>
+      <p>
+        Okay so the game can be started, lets get some player input and do something with it. Lets create a function for the <b>Go</b> button so that when pressed we get the value of the player action input, do something with it and clear the player action input.
+      </p>
+      <p>
+        So unlike the <b>Start</b> button which directly calls the <code>startGame</code> function, the <b>Go</b> button needs to do a bit more to get the player action input and then off-load the handling of that action to something else. So we're going to create an <b>onGoClick</b> function for the <b>Go</b> button to call.
+      </p>
+      We want to grab the value of the player-action input, do nothing if nothing has been inputted, or handle the input and clear the input field.
+      <pre>
+function onGoClick()
+{
+    var playerActionEl = document.getElementById('player-action');
+
+    var action = playerActionEl.value;
+    if (action === '')
+    {
+        return;
+    }
+
+    // Clear the player action input field.
+    playerActionEl.value = '';
+    processPlayerAction(action);
+}</pre>
+    <p>
+      So with this the <b>Go</b> button can grab the player action input and then pass off the processing of the player input to the <b>processPlayerAction</b> function. So lets write the <b>processPlayerAction</b> function now!
+    </p>
+    <p>For my example I'm going to add another variable <b>currentRoom</b> and  have the player be able to change the current room.</p>
+    <p>This <b>processPlayerAction</b> function is going to be the main focus of our game. Here is the basic outline of how the function should work:</p>
+    <pre>
+function processPlayerAction(action)
+{
+    if (action === 'simple action')
+    {
+        addGameWorldText('The player performed a simple action.');
+    }
+    else if (action === 'some other action')
+    {
+        addGameWorldText('The player performed some other action.');
+    }
+}</pre>
+    <p>
+      So we should make a few different actions:
+    </p>
+    <ul>
+      <li><b>look:</b> This should tell the player what room they're currently in using the <b>currentRoom</b> variable.</li>
+      <li><b>go north:</b> This should change the players <b>currentRoom</b> value to some other value (eg: 'second').</li>
+      <li><b>go south:</b> This should change the players <b>currentRoom</b> value back to the original value (eg: 'first').</li>
+    </ul>
+    There should also be a fallback if the action isn't one of those and tell the player something along the lines of <code>I don't know how to action</code>.
     </div>
   </body>
 </html>
