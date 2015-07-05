@@ -1,0 +1,29 @@
+#game-world {
+    position: relative;
+}
+
+.game-cell {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+}
+
+.game-cell.grass {
+    background: green;
+}
+.game-cell.wall {
+    background: brown;
+}
+
+.character {
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background: red;
+    left: 0px;
+    top: 0px;
+
+    transition: left 0.3s ease-in-out,
+        top 0.3s ease-in-out;
+}
