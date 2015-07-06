@@ -31,3 +31,6 @@
 .character.player {
     background: blue;
 }
+.character.enemy {
+    background: red;
+}

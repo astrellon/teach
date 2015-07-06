@@ -7,9 +7,14 @@ function Character()
     this.health = 10;
     this.maxHealth = 10;
     this.attack = 1;
-    this.defence = 1;
+    this.defence = 0;
+
+    this.weapon = null;
+    this.armour = null;
 
     this.map = null;
+
+    this.name = 'No name';
 }
 
 Character.prototype.createElement = function(className)
@@ -54,4 +59,66 @@ Character.prototype.updatePosition = function()
 {
     this.el.style.left = this.x * rpg.gridSize + 'px';
     this.el.style.top = this.y * rpg.gridSize + 'px';
+}
+
+Character.prototype.actionInDirection = function(x, y)
+{
+    var newX = this.x + x;
+    var newY = this.y + y;
+
+    this.actionAt(newX, newY);
+}
+Character.prototype.actionAt = function(x, y)
+{
+    var characterAt = this.map.findCharacterAt(x, y);
+    if (characterAt !== null)
+    {
+        if (!characterAt.isDead())
+        {
+            var damage = characterAt.dealDamage(this.calculateAttack());
+            rpg.output(this.name + ' deals ' + damage + ' to ' + characterAt.name);
+            return;
+        }
+    }
+
+    this.setPosition(x, y);
+}
+
+Character.prototype.calculateAttack = function()
+{
+    var result = this.attack;
+    if (this.weapon !== null)
+    {
+        result += this.weapon.attack;
+    }
+
+    return result;
+}
+Character.prototype.calculateArmour = function()
+{
+    var result = this.defence;
+    if (this.armour !== null)
+    {
+        result += this.armour.defence;
+    }
+
+    return result;
+}
+
+Character.prototype.dealDamage = function(damage)
+{
+    damage -= this.calculateArmour();
+    if (damage < 0)
+    {
+        damage = 0;
+    }
+
+    this.health -= damage;
+
+    return damage;
+}
+
+Character.prototype.isDead = function()
+{
+    return this.health <= 0;
 }

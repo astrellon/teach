@@ -51,5 +51,25 @@ GameMap.prototype.canMoveTo = function(x, y)
     }
 
     var cell = row[x];
-    return cell !== 'wall';
+
+    if (cell === 'wall')
+    {
+        return false;
+    }
+
+    return this.findCharacterAt(x, y) === null
+}
+
+GameMap.prototype.findCharacterAt = function(x, y)
+{
+    for (var i = 0; i < this.characters.length; i++)
+    {
+        var character = this.characters[i];
+        if (character.x === x && character.y === y)
+        {
+            return character;
+        }
+    }
+
+    return null;
 }
