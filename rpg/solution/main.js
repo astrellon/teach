@@ -27,24 +27,20 @@ function onLoad()
 
 function onKeyPress(e)
 {
-    if (e.keyCode === 37)
+    if (e.keyCode === 37) // Left
     {
-        // Left
         rpg.player.actionInDirection(-1, 0);
     }
-    else if (e.keyCode === 39)
+    else if (e.keyCode === 39) // Right
     {
-        // Right
         rpg.player.actionInDirection(1, 0);
     }
-    else if (e.keyCode === 38)
+    else if (e.keyCode === 38) // Up
     {
-        // Up
         rpg.player.actionInDirection(0, -1);
     }
-    else if (e.keyCode === 40)
+    else if (e.keyCode === 40) // Down
     {
-        // Down
         rpg.player.actionInDirection(0, 1);
     }
 }

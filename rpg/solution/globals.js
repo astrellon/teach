@@ -1,5 +1,5 @@
 rpg = {
-    'gridSize': 64,
+    'gridSize': 32,
     'player': null,
     'gameWorld': null,
 

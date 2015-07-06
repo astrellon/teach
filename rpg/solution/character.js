@@ -15,6 +15,7 @@ function Character()
     this.map = null;
 
     this.name = 'No name';
+    this.inventory = [];
 }
 
 Character.prototype.createElement = function(className)
@@ -121,4 +122,14 @@ Character.prototype.dealDamage = function(damage)
 Character.prototype.isDead = function()
 {
     return this.health <= 0;
+}
+
+Character.prototype.addToInventory = function(item)
+{
+    if (this.inventory.indexOf(item) >= 0)
+    {
+        return;
+    }
+
+    this.inventory.push(item);
 }

@@ -2,6 +2,7 @@ function GameMap()
 {
     this.tiles = [];
     this.characters = [];
+    this.items = [];
 }
 
 GameMap.prototype.renderMap = function()
@@ -72,4 +73,30 @@ GameMap.prototype.findCharacterAt = function(x, y)
     }
 
     return null;
+}
+
+GameMap.prototype.addItem = function(item)
+{
+    if (this.items.indexOf(item) >= 0)
+    {
+        return;
+    }
+
+    this.items.push(item);
+    item.map = this;
+}
+
+GameMap.prototype.findItemsAt = function(x, y)
+{
+    var result = [];
+    for (var i = 0; i < this.items.length; i++)
+    {
+        var item = this.items[i];
+        if (item.x === x && item.y === y)
+        {
+            result.push(item);
+        }
+    }
+
+    return result;
 }

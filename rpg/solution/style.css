@@ -4,8 +4,8 @@
 
 .game-cell {
     display: inline-block;
-    width: 64px;
-    height: 64px;
+    width: 32px;
+    height: 32px;
 }
 
 .game-cell.grass {
@@ -18,8 +18,8 @@
 .character {
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 32px;
+    height: 32px;
     background: red;
     left: 0px;
     top: 0px;
