@@ -12,7 +12,7 @@
     background: green;
 }
 .game-cell.wall {
-    background: brown;
+    background: grey;
 }
 
 .character {
@@ -26,4 +26,8 @@
 
     transition: left 0.3s ease-in-out,
         top 0.3s ease-in-out;
+}
+
+.character.player {
+    background: blue;
 }
