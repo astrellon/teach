@@ -7,6 +7,7 @@ function Weapon()
     
     this.el = null;
     this.location = 'ground';
+    this.slotEl = null;
 }
 
 Weapon.prototype.createElement = function(className)
@@ -25,16 +26,20 @@ Weapon.prototype.createElement = function(className)
         {
             return;
         }
-        self.location = 'in-hand';
-        rpg.itemInHand = self;
-        /*
+
         var dx = Math.abs(self.x - rpg.player.x);
         var dy = Math.abs(self.y - rpg.player.y);
-        if (dx <= 1 && dy <= 1)
+        if (self.location === 'in-slot' || (dx <= 1 && dy <= 1))
         {
-            rpg.player.addToInventory(self) 
+            if (self.location === 'in-slot' && self.slotEl.id === 'weapon-slot')
+            {
+                rpg.player.weapon = null;
+            }
+            rpg.placeIntoHand(self);
         }
-        */
+
+        // Prevent the slot click handler from happening.
+        e.stopPropagation();
     });
 }
 

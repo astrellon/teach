@@ -82,3 +82,21 @@
 .inv-slot .item {
     position: static;
 }
+
+#player-hand {
+    position: absolute;
+    z-index: 10;
+}
+
+#weapon-slot:before {
+    content: "Weapon";
+    position: absolute;
+    color: grey;
+    font-size: 8px;
+}
+#armour-slot:before {
+    content: "Armour";
+    position: absolute;
+    color: grey;
+    font-size: 8px;
+}

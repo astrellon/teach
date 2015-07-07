@@ -1,6 +1,6 @@
 function onLoad()
 {
-    rpg.createInventory();
+    rpg.setup();
 
     rpg.gameWorld = new GameMap();
     rpg.gameWorld.tiles = [
@@ -22,6 +22,12 @@ function onLoad()
     enemy.createElement('enemy');
     rpg.gameWorld.addCharacter(enemy);
     enemy.setPosition(1, 3);
+    enemy.name = 'Goblin';
+
+    enemy = new Character();
+    enemy.createElement('enemy');
+    rpg.gameWorld.addCharacter(enemy);
+    enemy.setPosition(3, 2);
     enemy.name = 'Goblin';
 
     document.body.addEventListener('keydown', onKeyPress);
