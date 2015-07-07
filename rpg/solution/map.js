@@ -2,6 +2,7 @@ function GameMap()
 {
     this.tiles = [];
     this.characters = [];
+    this.deadCharacter = [];
     this.items = [];
 }
 
@@ -36,6 +37,17 @@ GameMap.prototype.addCharacter = function(character)
 
     this.characters.push(character);
     character.map = this;
+}
+
+GameMap.prototype.setCharacterDead = function(character)
+{
+    var index = this.characters.indexOf(character);
+    if (index >= 0)
+    {
+        this.characters.splice(index, 1);
+    }
+
+    this.deadCharacter.push(character);
 }
 
 GameMap.prototype.canMoveTo = function(x, y)

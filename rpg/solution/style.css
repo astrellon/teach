@@ -23,6 +23,7 @@
     background: red;
     left: 0px;
     top: 0px;
+    z-index: 1;
 
     transition: left 0.3s ease-in-out,
         top 0.3s ease-in-out;
@@ -33,4 +34,51 @@
 }
 .character.enemy {
     background: red;
+}
+
+.character.dead {
+    background: darkgrey;
+    z-index: 0;
+}
+
+.item {
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+    width: 24px;
+    height: 24px;
+    margin: 4px 0 0 4px;
+
+    background: lightgrey;
+}
+.item.sword {
+    background: silver;
+}
+
+#inventory {
+    border: 1px solid grey;
+    display: inline-block;
+
+    background: lightgrey;
+    margin: 6px;
+    padding: 6px;
+}
+
+.inv-slot {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: white;
+    margin: 6px;
+
+    cursor: pointer;
+}
+.inv-slot:hover {
+    background: #efefef;
+}
+
+.inv-slot .item {
+    position: static;
 }

@@ -1,5 +1,7 @@
 function onLoad()
 {
+    rpg.createInventory();
+
     rpg.gameWorld = new GameMap();
     rpg.gameWorld.tiles = [
         ['wall', 'wall', 'wall'],

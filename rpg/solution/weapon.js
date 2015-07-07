@@ -2,7 +2,11 @@ function Weapon()
 {
     this.attack = 1;
     this.name = 'A weapon';
+    this.x = 0;
+    this.y = 0;
+    
     this.el = null;
+    this.location = 'ground';
 }
 
 Weapon.prototype.createElement = function(className)
@@ -11,8 +15,27 @@ Weapon.prototype.createElement = function(className)
     this.el.classList.add('item');
     this.el.classList.add(className);
 
-    var gameWorldEl = document.getElementById('game-world');
-    gameWorldEl.appendChild(this.el);
+    var gameItemsEl = document.getElementById('game-items');
+    gameItemsEl.appendChild(this.el);
+
+    var self = this;
+    this.el.addEventListener('click', function(e)
+    {
+        if (self.location === 'in-hand')
+        {
+            return;
+        }
+        self.location = 'in-hand';
+        rpg.itemInHand = self;
+        /*
+        var dx = Math.abs(self.x - rpg.player.x);
+        var dy = Math.abs(self.y - rpg.player.y);
+        if (dx <= 1 && dy <= 1)
+        {
+            rpg.player.addToInventory(self) 
+        }
+        */
+    });
 }
 
 Weapon.prototype.setPosition = function(x, y)
