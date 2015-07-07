@@ -127,7 +127,7 @@ Character.prototype.dealDamage = function(damage, damageSource)
     rpg.output(this.name + ' takes ' + damage + ' damage from ' + damageSource + '.');
     if (this.isDead())
     {
-        var droppedItem = new Weapon();
+        var droppedItem = new Item();
         droppedItem.createElement('sword');
         droppedItem.name = 'Wooden Sword';
         droppedItem.setPosition(this.x, this.y);

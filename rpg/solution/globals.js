@@ -52,19 +52,13 @@ rpg = {
         
         document.getElementById('weapon-slot').addEventListener('click', function(e)
         {
-            if (rpg.itemInHand instanceof Weapon)
-            {
-                rpg.player.weapon = rpg.itemInHand;
-                rpg.handleInvClick.call(this, e);
-            }
+            rpg.player.weapon = rpg.itemInHand;
+            rpg.handleInvClick.call(this, e);
         });
         document.getElementById('armour-slot').addEventListener('click', function(e)
         {
-            if (!(rpg.itemInHand instanceof Weapon))
-            {
-                rpg.player.armour = rpg.itemInHand;
-                rpg.handleInvClick.call(this, e);
-            }
+            rpg.player.armour = rpg.itemInHand;
+            rpg.handleInvClick.call(this, e);
         });
     },
 

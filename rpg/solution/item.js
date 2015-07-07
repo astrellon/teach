@@ -1,4 +1,4 @@
-function Weapon()
+function Item()
 {
     this.attack = 1;
     this.name = 'A weapon';
@@ -10,7 +10,7 @@ function Weapon()
     this.slotEl = null;
 }
 
-Weapon.prototype.createElement = function(className)
+Item.prototype.createElement = function(className)
 {
     this.el = document.createElement('div');
     this.el.classList.add('item');
@@ -43,7 +43,7 @@ Weapon.prototype.createElement = function(className)
     });
 }
 
-Weapon.prototype.setPosition = function(x, y)
+Item.prototype.setPosition = function(x, y)
 {
     this.x = x;
     this.y = y;
@@ -51,7 +51,7 @@ Weapon.prototype.setPosition = function(x, y)
     this.updatePosition();
 }
 
-Weapon.prototype.updatePosition = function()
+Item.prototype.updatePosition = function()
 {
     this.el.style.left = this.x * rpg.gridSize + 'px';
     this.el.style.top = this.y * rpg.gridSize + 'px';
