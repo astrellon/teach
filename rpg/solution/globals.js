@@ -1,8 +1,8 @@
 rpg = {
     'gridSize': 32,
+    'inventorySize': 8,
     'player': null,
     'gameWorld': null,
-    'inventorySize': 8,
     'itemInHand': null,
 
     'setup': function()
