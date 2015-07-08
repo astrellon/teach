@@ -1,8 +1,6 @@
-function Player()
+function PlayerController(character)
 {
-    this.character = new Character();
-    this.character.createElement('player');
-    this.character.name = 'Player';
+    this.character = character;
     
     var self = this;
     document.body.addEventListener('keydown', function onKeyPress(e)

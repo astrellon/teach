@@ -22,6 +22,7 @@ function Character()
     }
 
     this.loot = [];
+    this.controller = null;
 }
 
 Character.prototype.createElement = function(className)

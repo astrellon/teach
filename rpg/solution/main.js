@@ -11,9 +11,12 @@ function onLoad()
         ['wall', 'wall', 'wall']
     ];
 
-    rpg.player = new Player();
-    rpg.gameWorld.addCharacter(rpg.player.character);
-    rpg.player.character.setPosition(1, 1);
+    rpg.player = new Character();
+    rpg.player.createElement('player');
+    rpg.player.name = 'Player';
+    rpg.player.controller = new PlayerController(rpg.player);
+    rpg.gameWorld.addCharacter(rpg.player);
+    rpg.player.setPosition(1, 1);
     rpg.gameWorld.renderMap();
 
     var enemy = new Character();

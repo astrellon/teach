@@ -59,7 +59,7 @@ rpg = {
 
             if (rpg.itemInHand.type === 'weapon')
             {
-                rpg.player.character.weapon = rpg.itemInHand;
+                rpg.player.weapon = rpg.itemInHand;
                 rpg.handleInvClick.call(this, e);
             }
         });
@@ -72,7 +72,7 @@ rpg = {
 
             if (rpg.itemInHand.type === 'armour')
             {
-                rpg.player.character.armour = rpg.itemInHand;
+                rpg.player.armour = rpg.itemInHand;
                 rpg.handleInvClick.call(this, e);
             }
         });

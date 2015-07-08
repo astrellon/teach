@@ -29,13 +29,13 @@ Item.prototype.createElement = function()
             return;
         }
 
-        var dx = Math.abs(self.x - rpg.player.character.x);
-        var dy = Math.abs(self.y - rpg.player.character.y);
+        var dx = Math.abs(self.x - rpg.player.x);
+        var dy = Math.abs(self.y - rpg.player.y);
         if (self.location === 'in-slot' || (dx <= 1 && dy <= 1))
         {
             if (self.location === 'in-slot' && self.slotEl.id === 'weapon-slot')
             {
-                rpg.player.character.weapon = null;
+                rpg.player.weapon = null;
             }
             rpg.placeIntoHand(self);
         }
