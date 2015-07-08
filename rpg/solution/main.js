@@ -11,11 +11,9 @@ function onLoad()
         ['wall', 'wall', 'wall']
     ];
 
-    rpg.player = new Character();
-    rpg.player.createElement('player');
-    rpg.gameWorld.addCharacter(rpg.player);
-    rpg.player.setPosition(1, 1);
-    rpg.player.name = 'Player';
+    rpg.player = new Player();
+    rpg.gameWorld.addCharacter(rpg.player.character);
+    rpg.player.character.setPosition(1, 1);
     rpg.gameWorld.renderMap();
 
     var enemy = new Character();
@@ -38,25 +36,5 @@ function onLoad()
     loot.defence = 1;
     enemy.loot.push(loot);
 
-    document.body.addEventListener('keydown', onKeyPress);
 }
 
-function onKeyPress(e)
-{
-    if (e.keyCode === 37) // Left
-    {
-        rpg.player.actionInDirection(-1, 0);
-    }
-    else if (e.keyCode === 39) // Right
-    {
-        rpg.player.actionInDirection(1, 0);
-    }
-    else if (e.keyCode === 38) // Up
-    {
-        rpg.player.actionInDirection(0, -1);
-    }
-    else if (e.keyCode === 40) // Down
-    {
-        rpg.player.actionInDirection(0, 1);
-    }
-}
