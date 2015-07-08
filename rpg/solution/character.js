@@ -23,6 +23,7 @@ function Character()
 
     this.loot = [];
     this.controller = null;
+    this.currentlyYourTurn = false;
 }
 
 Character.prototype.createElement = function(className)
@@ -44,13 +45,15 @@ Character.prototype.setPosition = function(x, y)
 {
     if (!this.map.canMoveTo(x, y))
     {
-        return;
+        return false;
     }
 
     this.x = x;
     this.y = y;
 
     this.updatePosition();
+
+    return true;
 }
 
 Character.prototype.moveCharacter = function(x, y)
@@ -60,12 +63,14 @@ Character.prototype.moveCharacter = function(x, y)
 
     if (!this.map.canMoveTo(newX, newY))
     {
-        return;
+        return false;
     }
     this.x = newX;
     this.y = newY;
 
     this.updatePosition();
+
+    return true;
 }
 
 Character.prototype.updatePosition = function()
@@ -79,7 +84,7 @@ Character.prototype.actionInDirection = function(x, y)
     var newX = this.x + x;
     var newY = this.y + y;
 
-    this.actionAt(newX, newY);
+    return this.actionAt(newX, newY);
 }
 Character.prototype.actionAt = function(x, y)
 {
@@ -89,11 +94,11 @@ Character.prototype.actionAt = function(x, y)
         if (!characterAt.isDead())
         {
             var damage = characterAt.dealDamage(this.calculateAttack(), this.name);
-            return;
+            return true;
         }
     }
 
-    this.setPosition(x, y);
+    return this.setPosition(x, y);
 }
 
 Character.prototype.calculateAttack = function()
@@ -221,4 +226,22 @@ Character.prototype.findEmptySpace = function()
     }
 
     return -1;
+}
+
+Character.prototype.yourTurn = function()
+{
+    this.currentlyYourTurn = true;
+    if (this.controller)
+    {
+        this.controller.onYourTurn();
+    }
+    else
+    {
+        this.turnComplete();
+    }
+}
+Character.prototype.turnComplete = function(waitTime)
+{
+    this.currentlyYourTurn = false;
+    rpg.gameTick(this, waitTime);
 }

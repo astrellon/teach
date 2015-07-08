@@ -20,6 +20,25 @@ rpg = {
         });
     },
 
+    'gameTick': function(characterComplete, waitTime)
+    {
+        if (rpg.player.isDead())
+        {
+            console.log('Game over!');
+            return;
+        }
+
+        if (isNaN(waitTime) || waitTime < 0)
+        {
+            waitTime = 10;
+        }
+
+        var nextCharacter = rpg.gameWorld.findNextCharacter(characterComplete);
+        setTimeout(function() {
+            nextCharacter.yourTurn();
+        }, waitTime);
+    },
+
     'placeIntoHand': function(item)
     {
         if (rpg.itemInHand != null)

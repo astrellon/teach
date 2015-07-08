@@ -5,21 +5,41 @@ function PlayerController(character)
     var self = this;
     document.body.addEventListener('keydown', function onKeyPress(e)
     {
-        if (e.keyCode === 37) // Left
+        if (!self.character.currentlyYourTurn)
         {
-            self.character.actionInDirection(-1, 0);
+            return;
         }
-        else if (e.keyCode === 39) // Right
+
+        var performedAction = 0;
+        if (e.keyCode === 37 && self.character.actionInDirection(-1, 0)) // Left
         {
-            self.character.actionInDirection(1, 0);
+            performedAction = 300;
         }
-        else if (e.keyCode === 38) // Up
+        else if (e.keyCode === 39 && self.character.actionInDirection(1, 0)) // Right
         {
-            self.character.actionInDirection(0, -1);
+            performedAction = 300;
         }
-        else if (e.keyCode === 40) // Down
+        else if (e.keyCode === 38 && self.character.actionInDirection(0, -1)) // Up
         {
-            self.character.actionInDirection(0, 1);
+            performedAction = 300;
+        }
+        else if (e.keyCode === 40 && self.character.actionInDirection(0, 1)) // Down
+        {
+            performedAction = 300;
+        }
+        else if (e.keyCode === 32)
+        {
+            rpg.output(self.character.name + ' passed turn.');
+            performedAction = 10;
+        }
+
+        if (performedAction > 0)
+        {
+            self.character.turnComplete(performedAction);
         }
     });
+}
+PlayerController.prototype.onYourTurn = function()
+{
+
 }

@@ -4,11 +4,11 @@ function onLoad()
 
     rpg.gameWorld = new GameMap();
     rpg.gameWorld.tiles = [
-        ['wall', 'wall', 'wall'],
-        ['wall', 'grass', 'wall', 'wall'],
-        ['wall', 'grass', 'grass', 'grass'],
-        ['wall', 'grass', 'wall', 'wall'],
-        ['wall', 'wall', 'wall']
+        ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
+        ['wall', 'grass', 'wall', 'wall', 'grass', 'grass'],
+        ['wall', 'grass', 'grass', 'grass', 'grass', 'grass'],
+        ['wall', 'grass', 'wall', 'wall', 'grass', 'grass'],
+        ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall']
     ];
 
     rpg.player = new Character();
@@ -22,8 +22,9 @@ function onLoad()
     var enemy = new Character();
     enemy.createElement('enemy');
     rpg.gameWorld.addCharacter(enemy);
-    enemy.setPosition(1, 3);
+    enemy.setPosition(5, 3);
     enemy.name = 'Goblin';
+    enemy.controller = new EnemyController(enemy);
 
     var loot = new Item('weapon', 'Wooden Sword');
     loot.attack = 1;
@@ -34,10 +35,12 @@ function onLoad()
     rpg.gameWorld.addCharacter(enemy);
     enemy.setPosition(3, 2);
     enemy.name = 'Goblin';
+    enemy.controller = new EnemyController(enemy);
 
     loot = new Item('armour', 'Wooden Shield');
     loot.defence = 1;
     enemy.loot.push(loot);
 
+    rpg.gameTick();
 }
 

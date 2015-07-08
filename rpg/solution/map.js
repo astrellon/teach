@@ -112,3 +112,14 @@ GameMap.prototype.findItemsAt = function(x, y)
 
     return result;
 }
+
+GameMap.prototype.findNextCharacter = function(character)
+{
+    var index = this.characters.indexOf(character);
+    if (index < 0 || index >= this.characters.length - 1)
+    {
+        return this.characters[0];
+    }
+
+    return this.characters[index + 1];
+}
