@@ -20,6 +20,8 @@ function Character()
     {
         this.inventory.push(null);
     }
+
+    this.loot = [];
 }
 
 Character.prototype.createElement = function(className)
@@ -127,10 +129,12 @@ Character.prototype.dealDamage = function(damage, damageSource)
     rpg.output(this.name + ' takes ' + damage + ' damage from ' + damageSource + '.');
     if (this.isDead())
     {
-        var droppedItem = new Item();
-        droppedItem.createElement('sword');
-        droppedItem.name = 'Wooden Sword';
-        droppedItem.setPosition(this.x, this.y);
+        for (var i = 0; i < this.loot.length; i++)
+        {
+            var droppedItem = this.loot[i];
+            droppedItem.createElement();
+            droppedItem.setPosition(this.x, this.y);
+        }
 
         this.map.setCharacterDead(this);
         this.el.classList.add('dead');

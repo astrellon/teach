@@ -52,13 +52,29 @@ rpg = {
         
         document.getElementById('weapon-slot').addEventListener('click', function(e)
         {
-            rpg.player.weapon = rpg.itemInHand;
-            rpg.handleInvClick.call(this, e);
+            if (rpg.itemInHand == null)
+            {
+                return;
+            }
+
+            if (rpg.itemInHand.type === 'weapon')
+            {
+                rpg.player.weapon = rpg.itemInHand;
+                rpg.handleInvClick.call(this, e);
+            }
         });
         document.getElementById('armour-slot').addEventListener('click', function(e)
         {
-            rpg.player.armour = rpg.itemInHand;
-            rpg.handleInvClick.call(this, e);
+            if (rpg.itemInHand == null)
+            {
+                return;
+            }
+
+            if (rpg.itemInHand.type === 'armour')
+            {
+                rpg.player.armour = rpg.itemInHand;
+                rpg.handleInvClick.call(this, e);
+            }
         });
     },
 

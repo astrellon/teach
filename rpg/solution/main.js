@@ -24,11 +24,19 @@ function onLoad()
     enemy.setPosition(1, 3);
     enemy.name = 'Goblin';
 
+    var loot = new Item('weapon', 'Wooden Sword');
+    loot.attack = 1;
+    enemy.loot.push(loot)
+
     enemy = new Character();
     enemy.createElement('enemy');
     rpg.gameWorld.addCharacter(enemy);
     enemy.setPosition(3, 2);
     enemy.name = 'Goblin';
+
+    loot = new Item('armour', 'Wooden Shield');
+    loot.defence = 1;
+    enemy.loot.push(loot);
 
     document.body.addEventListener('keydown', onKeyPress);
 }

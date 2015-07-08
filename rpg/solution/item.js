@@ -1,7 +1,9 @@
-function Item()
+function Item(type, name)
 {
-    this.attack = 1;
-    this.name = 'A weapon';
+    this.attack = 0;
+    this.defence = 0;
+    this.name = name;
+    this.type = type;
     this.x = 0;
     this.y = 0;
     
@@ -10,11 +12,11 @@ function Item()
     this.slotEl = null;
 }
 
-Item.prototype.createElement = function(className)
+Item.prototype.createElement = function()
 {
     this.el = document.createElement('div');
     this.el.classList.add('item');
-    this.el.classList.add(className);
+    this.el.classList.add(this.type);
 
     var gameItemsEl = document.getElementById('game-items');
     gameItemsEl.appendChild(this.el);

@@ -57,8 +57,11 @@ body {
 
     background: lightgrey;
 }
-.item.sword {
+.item.weapon {
     background: silver;
+}
+.item.armour {
+    background: brown;
 }
 
 #inventory {
