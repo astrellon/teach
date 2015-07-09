@@ -123,3 +123,16 @@ GameMap.prototype.findNextCharacter = function(character)
 
     return this.characters[index + 1];
 }
+
+GameMap.prototype.canSee = function(object1, object2)
+{
+    var self = this;
+    return rpg.lineTest(object1.x, object1.y, object2.x, object2.y, function(x, y)
+    {
+        if (self.tiles[y][x] === 'wall')
+        {
+            return false;
+        }
+        return true;
+    });
+}

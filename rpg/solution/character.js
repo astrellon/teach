@@ -81,24 +81,60 @@ Character.prototype.updatePosition = function()
 
 Character.prototype.actionInDirection = function(x, y)
 {
+    if (x === 0 && y === 0)
+    {
+        // Do nothing
+        return false;
+    }
+
     var newX = this.x + x;
     var newY = this.y + y;
 
-    return this.actionAt(newX, newY);
-}
-Character.prototype.actionAt = function(x, y)
-{
-    var characterAt = this.map.findCharacterAt(x, y);
-    if (characterAt !== null)
+    // If the character is trying to move in two directions at once.
+    // If not check in moving in only one direction.
+    // This will allow enemies to see the player slightly off to the side and still move
+    // along walls.
+    if (x !== 0 && y !== 0)
     {
-        if (!characterAt.isDead())
+        // The character can't move in both directions at once.
+        if (!this.map.canMoveTo(newX, newY))
+        {
+            // But can they move vertically?
+            if (this.map.canMoveTo(this.x, newY))
+            {
+                newX = this.x;
+            }
+            // Can they move horizontally?
+            else if (this.map.canMoveTo(newX, this.y))
+            {
+                newY = this.y;
+            }
+        }
+    }
+    
+    var characterAt = this.map.findCharacterAt(newX, newY);
+    if (characterAt !== null && !characterAt.isDead())
+    {
+        // Basically don't let enemies attack other enemies.
+        var shouldAttack = (this.isPlayer() && characterAt.isEnemy()) ||
+                           (this.isEnemy() && characterAt.isPlayer()); 
+        if (shouldAttack)
         {
             var damage = characterAt.dealDamage(this.calculateAttack(), this.name);
             return true;
         }
     }
 
-    return this.setPosition(x, y);
+    return this.setPosition(newX, newY);
+}
+
+Character.prototype.isPlayer = function()
+{
+    return this === rpg.player;
+}
+Character.prototype.isEnemy = function()
+{
+    return this !== rpg.player;
 }
 
 Character.prototype.calculateAttack = function()

@@ -23,7 +23,7 @@ function onLoad()
     enemy.createElement('enemy');
     rpg.gameWorld.addCharacter(enemy);
     enemy.setPosition(5, 3);
-    enemy.name = 'Goblin';
+    enemy.name = 'Goblin 1';
     enemy.controller = new EnemyController(enemy);
 
     var loot = new Item('weapon', 'Wooden Sword');
@@ -33,8 +33,8 @@ function onLoad()
     enemy = new Character();
     enemy.createElement('enemy');
     rpg.gameWorld.addCharacter(enemy);
-    enemy.setPosition(3, 2);
-    enemy.name = 'Goblin';
+    enemy.setPosition(4, 1);
+    enemy.name = 'Goblin 2';
     enemy.controller = new EnemyController(enemy);
 
     loot = new Item('armour', 'Wooden Shield');
