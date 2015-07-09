@@ -18,6 +18,9 @@ body {
 .game-cell.wall {
     background: grey;
 }
+.game-cell.dirt {
+    background: tan;
+}
 
 .character {
     display: block;

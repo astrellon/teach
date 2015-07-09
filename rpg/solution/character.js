@@ -176,6 +176,7 @@ Character.prototype.dealDamage = function(damage, damageSource)
             var droppedItem = this.loot[i];
             droppedItem.createElement();
             droppedItem.setPosition(this.x, this.y);
+            this.map.addItem(droppedItem);
         }
 
         this.map.setCharacterDead(this);

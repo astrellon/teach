@@ -2,8 +2,9 @@ rpg = {
     'gridSize': 32,
     'inventorySize': 8,
     'player': null,
-    'gameWorld': null,
+    'map': null,
     'itemInHand': null,
+    'maps': {},
 
     'setup': function()
     {
@@ -18,6 +19,19 @@ rpg = {
                 style.top = e.pageY;
             }
         });
+    },
+
+    'changeToMap': function(map)
+    {
+        if (rpg.map != null)
+        {
+            rpg.map.detachObjects();
+        }
+        rpg.map = map;
+        if (map != null)
+        {
+            map.attachObjects();
+        }
     },
 
     'gameTick': function(characterComplete, waitTime)

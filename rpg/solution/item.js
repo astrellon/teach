@@ -10,6 +10,7 @@ function Item(type, name)
     this.el = null;
     this.location = 'ground';
     this.slotEl = null;
+    this.map = null;
 }
 
 Item.prototype.createElement = function()
@@ -17,9 +18,6 @@ Item.prototype.createElement = function()
     this.el = document.createElement('div');
     this.el.classList.add('item');
     this.el.classList.add(this.type);
-
-    var gameItemsEl = document.getElementById('game-items');
-    gameItemsEl.appendChild(this.el);
 
     var self = this;
     this.el.addEventListener('click', function(e)
@@ -33,6 +31,11 @@ Item.prototype.createElement = function()
         var dy = Math.abs(self.y - rpg.player.y);
         if (self.location === 'in-slot' || (dx <= 1 && dy <= 1))
         {
+            if (self.map != null)
+            {
+                self.map.removeItem(self);
+            }
+
             if (self.location === 'in-slot' && self.slotEl.id === 'weapon-slot')
             {
                 rpg.player.weapon = null;
@@ -58,4 +61,3 @@ Item.prototype.updatePosition = function()
     this.el.style.left = this.x * rpg.gridSize + 'px';
     this.el.style.top = this.y * rpg.gridSize + 'px';
 }
-

@@ -5,9 +5,9 @@ function onLoad()
     rpg.gameWorld = new GameMap();
     rpg.gameWorld.tiles = [
         ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall'],
-        ['wall', 'grass', 'wall', 'wall', 'grass', 'grass'],
-        ['wall', 'grass', 'grass', 'grass', 'grass', 'grass'],
-        ['wall', 'grass', 'wall', 'wall', 'grass', 'grass'],
+        ['wall', 'grass', 'wall', 'wall', 'dirt', 'dirt', 'grass', 'dirt', 'wall'],
+        ['wall', 'grass', 'dirt', 'dirt', 'dirt', 'grass', 'dirt', 'stairs:map2', 'wall'],
+        ['wall', 'grass', 'wall', 'wall', 'dirt', 'dirt', 'dirt', 'dirt', 'wall'],
         ['wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall', 'wall']
     ];
 

@@ -9,8 +9,6 @@ function GameMap()
 GameMap.prototype.renderMap = function()
 {
     var gameMapEl = document.getElementById('game-map');
-    gameMapEl.innerHTML = '';
-
     for (var y = 0; y < this.tiles.length; y++)
     {
         var row = document.createElement('div');
@@ -96,6 +94,18 @@ GameMap.prototype.addItem = function(item)
 
     this.items.push(item);
     item.map = this;
+
+    var itemsEl = document.getElementById('game-items');
+    itemsEl.appendChild(item.el);
+}
+GameMap.prototype.removeItem = function(item)
+{
+    var index = this.items.indexOf(item);
+    if (index >= 0)
+    {
+        this.items.splice(index, 1);
+        item.map = null;
+    }
 }
 
 GameMap.prototype.findItemsAt = function(x, y)
@@ -135,4 +145,43 @@ GameMap.prototype.canSee = function(object1, object2)
         }
         return true;
     });
+}
+
+GameMap.prototype.detachObjects = function()
+{
+    var gameMapEl = document.getElementById('game-map');
+    gameMapEl.innerHTML = '';
+
+    for (var i = 0; i < this.items.length; i++)
+    {
+        this.items[i].el.remove();
+    }
+    for (var i = 0; i < this.characters.length; i++)
+    {
+        this.characters[i].el.remove();
+    }
+    for (var i = 0; i < this.deadCharacter.length; i++)
+    {
+        this.deadCharacter[i].el.remove();
+    }
+}
+GameMap.prototype.attachObjects = function()
+{
+    this.renderMap();
+
+    var itemsEl = document.getElementById('game-items');
+    for (var i = 0; i < this.items.length; i++)
+    {
+        itemsEl.appendChild(this.items[i].el);
+    }
+
+    var charactersEl = document.getElementById('game-characters');
+    for (var i = 0; i < this.deadCharacter.length; i++)
+    {
+        charactersEl.appendChild(this.deadCharacter[i].el);
+    }
+    for (var i = 0; i < this.characters.length; i++)
+    {
+        charactersEl.appendChild(this.characters[i].el);
+    }
 }
