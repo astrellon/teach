@@ -23,3 +23,23 @@ GameMap.prototype.renderMap = function()
         gameMapEl.appendChild(row);
     }
 }
+
+GameMap.prototype.canMoveTo = function(x, y)
+{
+    if (y < 0 || y >= this.tiles.length)
+    {
+        return false;
+    }
+
+    var row = this.tiles[y];
+    if (x < 0 || x >= row.length)
+    {
+        return false;
+    }
+
+    if (row[x] === 'wall')
+    {
+        return false;
+    }
+    return true;
+}

@@ -1,0 +1,31 @@
+body {
+    font-family: sans-serif;
+}
+
+#game-world {
+    position: relative;
+}
+
+.game-cell {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+
+.game-cell.grass {
+    background: green;
+}
+.game-cell.wall {
+    background: grey;
+}
+
+.character {
+    display: block;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+}
+
+.character.player {
+    background: blue;
+}
