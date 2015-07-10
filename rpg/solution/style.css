@@ -21,6 +21,9 @@ body {
 .game-cell.dirt {
     background: tan;
 }
+.game-cell.stairs {
+    background: #333;
+}
 
 .character {
     display: block;

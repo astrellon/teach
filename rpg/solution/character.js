@@ -31,9 +31,6 @@ Character.prototype.createElement = function(className)
     this.el = document.createElement('div');
     this.el.classList.add('character');
     this.el.classList.add(className);
-
-    var gameCharacterEl = document.getElementById('game-characters');
-    gameCharacterEl.appendChild(this.el);
 }
 Character.prototype.removeElement = function()
 {
@@ -60,17 +57,22 @@ Character.prototype.moveCharacter = function(x, y)
 {
     var newX = this.x + x;
     var newY = this.y + y;
-
-    if (!this.map.canMoveTo(newX, newY))
+    
+    var stairs = this.map.isStairs(newX, newY);
+    if (stairs != null)
     {
-        return false;
+        this.map.removeCharacter(this);
+        stairs.map.addCharacter(this);
+        this.setPosition(stairs.x, stairs.y);
+
+        if (this.isPlayer())
+        {
+            rpg.changeToMap(stairs.map);
+        }
+        return true;
     }
-    this.x = newX;
-    this.y = newY;
 
-    this.updatePosition();
-
-    return true;
+    return this.setPosition(newX, newY);
 }
 
 Character.prototype.updatePosition = function()
@@ -102,11 +104,13 @@ Character.prototype.actionInDirection = function(x, y)
             // But can they move vertically?
             if (this.map.canMoveTo(this.x, newY))
             {
+                x = 0;
                 newX = this.x;
             }
             // Can they move horizontally?
             else if (this.map.canMoveTo(newX, this.y))
             {
+                y = 0;
                 newY = this.y;
             }
         }
@@ -125,7 +129,7 @@ Character.prototype.actionInDirection = function(x, y)
         }
     }
 
-    return this.setPosition(newX, newY);
+    return this.moveCharacter(x, y);
 }
 
 Character.prototype.isPlayer = function()

@@ -17,9 +17,18 @@ GameMap.prototype.renderMap = function()
         var mapRow = this.tiles[y];
         for (var x = 0; x < mapRow.length; x++)
         {
+            var tile = mapRow[x];
             var cell = document.createElement('span');
             cell.classList.add('game-cell');
-            cell.classList.add(mapRow[x]);
+            if (tile.indexOf(':') > 0)
+            {
+                var split = tile.split(':');
+                cell.classList.add(split[0]);    
+            }
+            else
+            {
+                cell.classList.add(mapRow[x]);
+            }
             row.appendChild(cell);
         }
         gameMapEl.appendChild(row);
@@ -35,6 +44,24 @@ GameMap.prototype.addCharacter = function(character)
 
     this.characters.push(character);
     character.map = this;
+
+    if (this === rpg.map)
+    {
+        var charactersEl = document.getElementById('game-characters');
+        charactersEl.appendChild(character.el);
+    }
+}
+GameMap.prototype.removeCharacter = function(character)
+{
+    var index = this.characters.indexOf(character);
+    if (index >= 0)
+    {
+        this.characters.splice(index, 1);
+        character.map = null;
+        character.el.remove();
+        return true;
+    }
+    return false;
 }
 
 GameMap.prototype.setCharacterDead = function(character)
@@ -95,8 +122,11 @@ GameMap.prototype.addItem = function(item)
     this.items.push(item);
     item.map = this;
 
-    var itemsEl = document.getElementById('game-items');
-    itemsEl.appendChild(item.el);
+    if (this === rpg.map)
+    {
+        var itemsEl = document.getElementById('game-items');
+        itemsEl.appendChild(item.el);
+    }
 }
 GameMap.prototype.removeItem = function(item)
 {
@@ -105,7 +135,9 @@ GameMap.prototype.removeItem = function(item)
     {
         this.items.splice(index, 1);
         item.map = null;
+        return true;
     }
+    return false;
 }
 
 GameMap.prototype.findItemsAt = function(x, y)
@@ -184,4 +216,19 @@ GameMap.prototype.attachObjects = function()
     {
         charactersEl.appendChild(this.characters[i].el);
     }
+}
+
+GameMap.prototype.isStairs = function(x, y)
+{
+    var tile = this.tiles[y][x];
+    if (tile.indexOf('stairs') === 0)
+    {
+        var split = tile.split(':');
+        return {
+            'map': rpg.maps[split[1]],
+            'x': parseInt(split[2]),
+            'y': parseInt(split[3])
+        }
+    }
+    return null;
 }

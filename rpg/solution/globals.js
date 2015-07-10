@@ -47,7 +47,13 @@ rpg = {
             waitTime = 10;
         }
 
-        var nextCharacter = rpg.gameWorld.findNextCharacter(characterComplete);
+        if (rpg.map.characters.length === 0)
+        {
+            rpg.output('No characters');
+            return;
+        }
+
+        var nextCharacter = rpg.map.findNextCharacter(characterComplete);
         setTimeout(function() {
             nextCharacter.yourTurn();
         }, waitTime);
