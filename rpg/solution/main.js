@@ -49,6 +49,18 @@ function onLoad()
     loot = new Item('armour', 'Wooden Shield');
     loot.defence = 1;
     enemy.loot.push(loot);
+    
+    enemy = new Character();
+    enemy.createElement('enemy');
+    map2.addCharacter(enemy);
+    enemy.setPosition(0, 0);
+    enemy.name = 'Goblin 3';
+    enemy.controller = new EnemyController(enemy);
+
+    loot = new Item('armour', 'Wooden Shield');
+    loot.defence = 1;
+    enemy.loot.push(loot);
+
 
     rpg.changeToMap(map1);
     rpg.gameTick();

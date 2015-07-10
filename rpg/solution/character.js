@@ -58,18 +58,23 @@ Character.prototype.moveCharacter = function(x, y)
     var newX = this.x + x;
     var newY = this.y + y;
     
-    var stairs = this.map.isStairs(newX, newY);
-    if (stairs != null)
+    // Only the player can go through stairs, otherwise the enemy would stop moving on the
+    // other side and block the player.
+    if (this.isPlayer())
     {
-        this.map.removeCharacter(this);
-        stairs.map.addCharacter(this);
-        this.setPosition(stairs.x, stairs.y);
-
-        if (this.isPlayer())
+        var stairs = this.map.isStairs(newX, newY);
+        if (stairs != null)
         {
-            rpg.changeToMap(stairs.map);
+            this.map.removeCharacter(this);
+            stairs.map.addCharacter(this);
+            this.setPosition(stairs.x, stairs.y);
+
+            if (this.isPlayer())
+            {
+                rpg.changeToMap(stairs.map);
+            }
+            return true;
         }
-        return true;
     }
 
     return this.setPosition(newX, newY);
