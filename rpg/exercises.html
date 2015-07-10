@@ -14,9 +14,119 @@
   <body>
     <div class="container-fluid">
       <h1>RPG Exercises</h1>
+
+      <div>
+        <h2>Introduction</h2>
+        <p>
+          Lets create a simple RPG!
+        </p>
+        <p>
+          First we need to break down some basic aspects of an RPG so that we figure out what we're going to do and how we're going to do them.
+        </p>
+        <ul>
+          <li>A view of the game world</li>
+          <li>How the player and other in game characters are represented</li>
+          <li>Skills and stats</li>
+          <li>Player progression</li>
+          <li>Story and setting</li>
+          <li>Player input (keyboard, mouse, etc)</li>
+          <li>Music and sound</li>
+        </ul>
+        <p>
+          So lets look at each part in more detail about how we should approach each part.
+        </p>
+
+        <h3>Game World</h3>
+        <p>
+          There are many different ways to represent a game world, the number of dimensions (from 1 upwards) need not be a limiting factor. 
+          Neither how they're represented, either in chunks like a grid, hexes or voxels (3d pixels). 
+        </p>
+        <p>
+          With so much to choose from we're going to stick with the reliable and much simplier to work with 2d square tiles world.
+          And while this isn't necessarily tied to the game world, we're also going to be making the game turn based.
+        </p>
+
+        <h3>Game Characters</h3>
+        <p>
+          Different games deal with characters in different ways, and for different reasons. Many games take a different approach for the
+          player and for NPCs and enemies. 
+        </p>
+        <p>
+          Take Diablo for example, the player has a set of stats, an inventory and equippable body parts.
+          However the enemies have their own stats, no inventory and no equippable slots. Their stats are
+          essentially pre-defined and not reflective of whatever items they might be appearing to hold. 
+          This gives the game developers a lot of control over how much of a threat they are, however it does
+          create a disconnect because the stats of the enemies aren't controlled by what they're wearing in their graphics.
+        </p>
+        <p>
+          This is in contrast to how Fallout or The Elder Scrolls typically work.
+          All the characters in that world do have equippable slots, inventories and generally speaking
+          their stats are determined by their equipment which you can see them holding. I would assume there's
+          some additional fudging of enemy stats to make them more or less of a danger to the player but for
+          the most part an enemy is setup basically like a player. The same is true for NPCs.
+        </p>
+        <p>
+          I tend to lean more towards the Elder Scrolls and Fallout way of doing things. Where the only real difference
+          between the player and other NPCs is the code that controls the player object and what the game camera is following.
+          This also has some advantages where anything that you allow the character to do, NPCs can do as well, and vice versa.
+        </p>
+
+        <h3>Skills and Stats</h3>
+        <p>
+          Skills and stats are a big part of any RPG since they're abstractions of what an item or character in a game world can do.
+          This means that the amount of work you want to put into your skills and stats is pretty open ended.
+        </p>
+        <p>
+          For the sake of simplicty we're going with a system that doesn't involve any skills other than the ability to move and attack,
+          and stats are minimal as well.
+        </p>
+
+        <h3>Player Progression</h3>
+        <p>
+          Another big part of an RPG is progression in some form. For the sake of simplicty we're going with a more Diablo like system where
+          items make up the majority of your progression but without any skills.
+        </p>
+
+        <h3>Story and Setting</h3>
+        <p>
+          In short, no story here, because one isn't needed for an example. However that wouldn't fly for making a real game for the most part.
+        </p>
+
+        <h3>Player Input</h3>
+        <p>
+          Another thing that in todays world is becoming more open ended with motion controls, VR, AR, touch screens. 
+          Our game is going to be pretty simple being a top down 2d turn based game, but along with this simplicity 
+          means that we could in theory use just about any input scheme.
+        </p>
+        <p>
+          We're going to keep things simple go with keyboard controls for moving and mouse controls for dealing with items. 
+        </p>
+
+        <h3>Sound and Music</h3>
+        <p>
+          Another important part of any game, that we're going to skip over for the most part. But we could come back to it at a later date since
+          handling playing back music and short sound clips is quite easy with modern HTML and Javascript.
+        </p>
+      </div>       
+      
       <div>
         <h2>01 Map Renderer</h2>
-        Drawing the map.
+        <div>
+          Drawing the map.
+        </div>
+      </div>       
+      
+      <div>
+        <h2>02 Character</h2>
+        <div>
+          Creating a charcter.
+        </div>
+      </div>       
+      <div>
+        <h2>03 Player Input</h2>
+        <div>
+          Moving the player character.
+        </div>
       </div>       
     </div>
   </body>
