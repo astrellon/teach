@@ -3,6 +3,8 @@ function Character()
     this.x = 0;
     this.y = 0;
     this.el = null;
+
+    this.map = null;
 }
 
 Character.prototype.createElement = function(className)
@@ -10,7 +12,10 @@ Character.prototype.createElement = function(className)
     this.el = document.createElement('div');
     this.el.classList.add('character');
     this.el.classList.add(className);
-    
+
+    var charactersEl = document.getElementById('game-characters');
+    charactersEl.appendChild(this.el);
+
     var self = this;
     document.body.addEventListener('keydown', function onKeyPress(e)
     {
@@ -58,6 +63,6 @@ Character.prototype.moveCharacter = function(x, y)
 
 Character.prototype.updatePosition = function()
 {
-    this.el.style.left = this.x * rpg.gridSize + 'px';
-    this.el.style.top = this.y * rpg.gridSize + 'px';
+    this.el.style.left = this.x * 32 + 'px';
+    this.el.style.top = this.y * 32 + 'px';
 }

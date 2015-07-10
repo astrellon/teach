@@ -18,3 +18,14 @@ body {
 .game-cell.wall {
     background: grey;
 }
+
+.character {
+    display: block;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+}
+
+.character.player {
+    background: blue;
+}

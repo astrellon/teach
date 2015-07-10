@@ -27,6 +27,7 @@ obj/
 *.swp
 *.swo
 .undodir
+.ctrlp
 
 # ============ #
 # OS generated #
@@ -38,4 +39,3 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
