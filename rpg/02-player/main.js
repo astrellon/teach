@@ -10,7 +10,6 @@ function onLoad()
 
     var character = new Character();
     character.createElement('player');
-    character.map = map;
     character.setPosition(1, 1);
 }
 
