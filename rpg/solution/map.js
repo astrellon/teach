@@ -95,7 +95,7 @@ GameMap.prototype.canMoveTo = function(x, y)
         return false;
     }
 
-    return this.findCharacterAt(x, y) === null
+    return this.findCharacterAt(x, y) === null;
 }
 
 GameMap.prototype.findCharacterAt = function(x, y)
